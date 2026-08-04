@@ -3,6 +3,12 @@
 
 **Cos'è + stato:** landing page Piglia Bene (contatti + servizi), HTML5/CSS singolo file, estetica catalogo Natale 25 (rosso #9B0E0E / panna #F7F4DC, **Arsenica Trial** Thin/Light + Montserrat). **BOZZA v0.2 — round commenti Gio 4/8 applicato, attesa verifica.**
 
+## HANDOFF → nuova sessione (5/8, token GitHub)
+Obiettivo: **demo online su GitHub Pages**. Il connettore GitHub è autorizzato (utente **Gio-227**) ma il token della vecchia sessione era morto (401 su get_me): in sessione nuova funziona.
+Sequenza:
+1. `get_me` per conferma token → 2. `create_repository` **pigliabene-demo** (public, no init) → 3. PowerShell nel fascicolo: `git remote add origin https://github.com/Gio-227/pigliabene-demo.git` + `git push -u origin beta` + `git push origin beta:gh-pages` (GCM può aprire il browser per autorizzare: Gio approva una volta) → 4. Pages: verificare attivazione su gh-pages (altrimenti Settings→Pages→branch gh-pages) → 5. URL atteso `https://gio-227.github.io/pigliabene-demo/` — testare video+font → 6. Annotare qui + commit.
+Avvisi: Arsenica **Trial** pubblica = solo demo, licenza prima del lancio vero; repo pubblico.
+
 ## Open loops
 - [x] Font titoli scelto 5/8: **Arsenica Light (00)** — Thin bocciata; v0.3 aggiornata
 - [ ] Verifica Gio su v0.2 (resto della pagina)
