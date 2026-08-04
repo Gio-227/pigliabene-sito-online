@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!-- Cowork v1.0 | Feel Good srl | Landing page Piglia Bene — bozza v0.2 (commenti Gio 4/8) | 2026-08-04 18:50 CEST | Fable 5 | fascicolo: sito-landing -->
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piglia Bene — Vineria, Bottega, Catering &amp; Eventi · Sansepolcro</title>
+<meta name="description" content="Piglia Bene: vineria, bottega e catering a Sansepolcro. Eventi aziendali e privati, selezione vini, artigiani del gusto.">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Arsenica (Zetafonts, versione Trial dal PC — licenza da regolarizzare prima della pubblicazione) */
+  @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Thin.ttf') format('truetype');font-weight:200;font-display:swap}
+  @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Light.ttf') format('truetype');font-weight:300;font-display:swap}
+  @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+
+  :root{
+    --rosso:#9B0E0E;
+    --panna:#F7F4DC;
+    --panna-soft:rgba(247,244,220,.55);
+    --mx:clamp(24px,6vw,80px); /* margine pagina */
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--rosso);
+    color:var(--panna);
+    font-family:'Montserrat',sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--panna);color:var(--rosso)}
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- nav ---------- */
+  header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:28px var(--mx);
+    position:sticky;top:0;background:var(--rosso);z-index:10;
+  }
+  .logo-box{
+    border:2.5px solid var(--panna);
+    padding:10px 14px;
+    font-weight:600;font-size:13px;letter-spacing:.42em;
+    line-height:1.7;text-transform:uppercase;
+    display:inline-block;text-align:left;
+  }
+  nav{display:flex;gap:clamp(16px,3vw,40px);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+  nav a{border-bottom:1px solid transparent;padding-bottom:3px;transition:border-color .25s}
+  nav a:hover{border-color:var(--panna)}
+  @media(max-width:640px){nav{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:88vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:6vh var(--mx) 10vh;
+  }
+  .kicker{
+    font-size:clamp(11px,1.3vw,14px);letter-spacing:.3em;text-transform:uppercase;
+    font-weight:600;margin-bottom:4vh;color:var(--panna-soft);
+  }
+  h1{
+    font-family:'Arsenica',serif;font-weight:200;
+    font-size:clamp(64px,14vw,190px);
+    line-height:.92;letter-spacing:.01em;
+    text-transform:uppercase;
+  }
+  .hero small{
+    display:block;margin-top:5vh;
+    font-family:'Montserrat',sans-serif;
+    font-size:clamp(12px,1.4vw,15px);letter-spacing:.22em;text-transform:uppercase;font-weight:600;
+  }
+  .hero small span{white-space:nowrap}
+
+  /* ---------- section base ---------- */
+  section{padding:12vh var(--mx)}
+  .label{
+    font-size:12px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;
+    margin-bottom:7vh;display:flex;align-items:baseline;gap:24px;
+  }
+  .label::after{content:'';flex:1;border-bottom:1px solid var(--panna-soft)}
+  h2{
+    font-family:'Arsenica',serif;font-weight:200;text-transform:uppercase;
+    font-size:clamp(40px,7vw,96px);line-height:1;margin-bottom:6vh;
+  }
+
+  /* ---------- video: due 3:4 affiancati, blocco centrato ---------- */
+  .video-wrap{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:clamp(14px,2.5vw,32px);
+    max-width:820px;margin:0 auto;
+  }
+  .video-wrap figure{position:relative;aspect-ratio:3/4;overflow:hidden}
+  .video-wrap video{
+    width:100%;height:100%;object-fit:cover;object-position:center;display:block;
+    border:2.5px solid var(--panna);
+  }
+  @media(max-width:560px){
+    .video-wrap{grid-template-columns:1fr;max-width:420px}
+  }
+
+  /* ---------- filosofia ---------- */
+  .prose{max-width:940px;font-size:clamp(17px,2vw,22px);line-height:1.75}
+  .prose p+p{margin-top:1.4em}
+  .prose em{font-style:italic;font-family:'Arsenica',serif;font-weight:300}
+
+  /* ---------- servizi: righe a tutta battuta, testi ai margini ---------- */
+  .rule-cut{width:min(52vw,880px);border-bottom:1px solid var(--panna-soft)}
+  ul.lista{list-style:none}
+  ul.lista li{
+    display:flex;justify-content:space-between;align-items:baseline;gap:24px;
+    padding:24px 0;border-bottom:1px solid var(--panna-soft);
+  }
+  ul.lista li:last-child{border-bottom:none}
+  ul.lista .voce{font-family:'Arsenica',serif;font-size:clamp(17px,2.6vw,29px);font-weight:300}
+  ul.lista .nota{font-size:9px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--panna-soft);text-align:right;white-space:nowrap}
+  @media(max-width:560px){ul.lista .nota{display:none}}
+
+  /* ---------- contatti (stessa scala dei servizi) ---------- */
+  .contatti-grid{max-width:720px}
+  .riga{display:block;padding:26px 0;border-bottom:1px solid var(--panna-soft)}
+  .riga:first-child{border-top:1px solid var(--panna-soft)}
+  .riga .campo{font-size:9px;letter-spacing:.28em;text-transform:uppercase;font-weight:700;display:block;margin-bottom:8px;color:var(--panna-soft)}
+  .riga .valore{
+    font-family:'Arsenica',serif;font-weight:300;
+    font-size:clamp(17px,2.6vw,29px);line-height:1.15;
+    border-bottom:2px solid transparent;transition:border-color .25s;
+    overflow-wrap:anywhere;
+  }
+  a.riga:hover .valore{border-color:var(--panna)}
+
+  /* ---------- cta ---------- */
+  .cta{
+    display:inline-block;margin-top:8vh;
+    border:2.5px solid var(--panna);
+    padding:20px 38px;
+    font-size:13px;letter-spacing:.35em;text-transform:uppercase;font-weight:700;
+    transition:background .25s,color .25s;
+  }
+  .cta:hover{background:var(--panna);color:var(--rosso)}
+
+  /* ---------- footer ---------- */
+  footer{
+    padding:10vh var(--mx) 6vh;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+    color:var(--panna-soft);line-height:2.2;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo-box" href="#top">Piglia<br>Bene</a>
+  <nav>
+    <a href="#chi">Chi siamo</a>
+    <a href="#servizi">Servizi</a>
+    <a href="#contatti">Contatti</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <p class="kicker">Vineria · Bottega · Catering &amp; Eventi — Sansepolcro</p>
+  <h1>Solamente<br>i soliti<br>noti?</h1>
+  <small><span>Ovviamente no.</span> <span>Con noi — Piglia Bene!</span></small>
+</div>
+
+<!-- VIDEO -->
+<section aria-label="Video">
+  <div class="video-wrap">
+    <figure>
+      <video src="media/natale25-loop.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    </figure>
+    <figure>
+      <video src="media/scarrellata-loop.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    </figure>
+  </div>
+</section>
+
+<!-- CHI SIAMO -->
+<section id="chi">
+  <p class="label">Chi siamo</p>
+  <h2>Artigiani<br>del gusto</h2>
+  <div class="prose">
+    <p>Selezioniamo non solo prodotti, ma produttori: persone autentiche, con passioni che vanno ben oltre il semplice amare il proprio lavoro. Persone che ricercano, innovano con curiosità e fantasia, rispettose della materia prima e della natura che la produce.</p>
+    <p>La filosofia è semplice: quando c'è ottimo cibo, un bel calice e della buona musica, siamo tutti presi e prese bene.</p>
+    <p><em>Artigiani: amanti dei processi dietro ogni singolo loro prodotto.</em></p>
+  </div>
+</section>
+
+<!-- SERVIZI -->
+<section id="servizi">
+  <p class="label">Servizi</p>
+  <h2>In azienda<br>come in vineria</h2>
+  <div class="rule-cut"></div>
+  <ul class="lista">
+    <li><span class="voce">Aperitivo open bar</span><span class="nota">miscelati e vini</span></li>
+    <li><span class="voce">Ostriche, crudité &amp; prosciutto a mano</span><span class="nota">cibo e bevande</span></li>
+    <li><span class="voce">Musica live &amp; DJ set</span><span class="nota">intrattenimento</span></li>
+    <li><span class="voce">Allestimenti scenografici</span><span class="nota">ospitalità</span></li>
+    <li><span class="voce">Videomaker &amp; fotografo</span><span class="nota">multimedia</span></li>
+    <li><span class="voce">Laboratori di pasta fresca, yoga &amp; pilates</span><span class="nota">team building</span></li>
+    <li><span class="voce">Pacchi aziendali &amp; panettoni artigianali</span><span class="nota">regalistica</span></li>
+    <li><span class="voce">Ampia selezione vini</span><span class="nota">oltre 500 etichette</span></li>
+  </ul>
+  <div class="rule-cut"></div>
+  <a class="cta" href="#contatti">Prenota o chiedi un preventivo</a>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti">
+  <p class="label">Contatti</p>
+  <h2>Piglia bene,<br>scrivici</h2>
+  <div class="contatti-grid">
+    <a class="riga" href="mailto:bottegapigliabene@gmail.com">
+      <span class="campo">E-mail</span>
+      <span class="valore">bottegapigliabene@gmail.com</span>
+    </a>
+    <a class="riga" href="https://wa.me/3905751694910" target="_blank" rel="noopener">
+      <span class="campo">WhatsApp</span>
+      <span class="valore">0575 1694910</span>
+    </a>
+    <a class="riga" href="https://instagram.com/piglia.bene" target="_blank" rel="noopener">
+      <span class="campo">Instagram</span>
+      <span class="valore">@piglia.bene</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  Piglia Bene · Feel Good S.r.l. — Via Giordano Bruno 47, Sansepolcro (AR)<br>
+  P.IVA 02434040511 · bottegapigliabene@gmail.com
+</footer>
+
+</body>
+</html>
