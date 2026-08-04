@@ -4,7 +4,7 @@
 **Cos'è + stato:** landing page Piglia Bene (contatti + servizi), HTML5/CSS singolo file, estetica catalogo Natale 25 (rosso #9B0E0E / panna #F7F4DC, **Arsenica Trial** Thin/Light + Montserrat). **BOZZA v0.2 — round commenti Gio 4/8 applicato, attesa verifica.**
 
 ## Open loops
-- [ ] **Scelta font titoli**: Arsenica Thin bocciata («fa cacare» in grande) → `font-test.html` con 10 candidati + Arsenica Light riferimento, attesa numero da Gio
+- [x] Font titoli scelto 5/8: **Arsenica Light (00)** — Thin bocciata; v0.3 aggiornata
 - [ ] Verifica Gio su v0.2 (resto della pagina)
 - [ ] ⚠ **Licenza Arsenica**: sul PC c'è la versione *Trial* (Zetafonts) — da acquistare licenza webfont prima della pubblicazione
 - [ ] Watermark «a Natale» sul video prodotti: impresso dal sec ~1 a fine clip, non eliminabile via taglio → se serve pulito, riesportare da Canva senza layer testo
