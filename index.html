@@ -8,10 +8,13 @@
 <meta name="description" content="Piglia Bene: vineria, bottega e catering a Sansepolcro. Eventi aziendali e privati, selezione vini, artigiani del gusto.">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* Arsenica (Zetafonts, versione Trial dal PC — licenza da regolarizzare prima della pubblicazione) */
-  @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Thin.ttf') format('truetype');font-weight:200;font-display:swap}
-  @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Light.ttf') format('truetype');font-weight:300;font-display:swap}
-  @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+  /* Arsenica (Zetafonts, versione Trial dal PC — licenza da regolarizzare prima della pubblicazione)
+     unicode-range esclude le cifre U+0030-0039: nella Trial sono tutte sostituite da un quadratino
+     segnaposto (stessa sagoma per tutte e dieci). Così i numeri cadono su Montserrat.
+     Con la licenza acquistata: togliere unicode-range e i numeri torneranno in Arsenica. */
+  @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Thin.ttf') format('truetype');font-weight:200;font-display:swap;unicode-range:U+0-2F,U+3A-10FFFF}
+  @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Light.ttf') format('truetype');font-weight:300;font-display:swap;unicode-range:U+0-2F,U+3A-10FFFF}
+  @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Regular.ttf') format('truetype');font-weight:400;font-display:swap;unicode-range:U+0-2F,U+3A-10FFFF}
 
   :root{
     --rosso:#9B0E0E;
