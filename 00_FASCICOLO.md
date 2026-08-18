@@ -1,4 +1,4 @@
-<!-- Header Cowork v1.0 | Feel Good srl | Fascicolo pigliabene-sito-online — testata | v0.5 | 2026-08-07 00:10 CEST | Fable 5 | PARA:P -->
+<!-- Header Cowork v1.0 | Feel Good srl | Fascicolo pigliabene-sito-online — testata | v0.6 | 2026-08-18 13:15 CEST | Opus 5 | PARA:P -->
 # Fascicolo — pigliabene-sito-online
 *(ex `sito-landing`, rinominato 5/8 per allinearlo al repo)*
 
@@ -7,8 +7,22 @@
 ## 🌐 Demo online (5/8 h02:05)
 - **URL:** https://gio-227.github.io/pigliabene-sito-online/ · **Repo:** https://github.com/Gio-227/pigliabene-sito-online (pubblico)
 - **Nome unico:** cartella del fascicolo e repo si chiamano uguale — `pigliabene-sito-online`. Il repo vuoto omonimo creato da Gio è stato eliminato 5/8.
-- **Origine Pages:** branch `gh-pages` (root), HTTPS forzato. Branch di lavoro `beta`; si pubblica con `git push origin beta:gh-pages`.
-- **Ciclo di aggiornamento:** commit su `beta` → `git push origin beta` → `git push origin beta:gh-pages` (~1 min al live).
+- **Origine Pages:** branch `gh-pages` (root), HTTPS forzato. ⚠ da spostare su `main` (v. Branch).
+- **Ciclo di aggiornamento:** commit su `beta` → `git push origin beta` → merge in `main` → push (~1 min al live).
+
+## Branch — cantiere e vetrina (18/8)
+Impostazione chiesta da Gio e confermata da **Francesco Saverio** (ingegnere, segue hosting e DNS):
+una pagina per il beta e una per il prod, e su `pigliabene.it` si punta il DNS di quello in prod.
+
+| branch | cos'è | chi lo tocca |
+|---|---|---|
+| `main` | **produzione.** Solo roba verificata. È quello che vede il pubblico. | ci si arriva per merge da `beta`, mai a mano |
+| `beta` | **cantiere.** Si lavora, si rompe, si prova. | qui si scrive |
+| `gh-pages` | residuo della prima pubblicazione del 5/8 | da chiudere quando Pages passa a `main` |
+
+- **Nodo aperto:** una repo su GitHub Pages serve **un solo indirizzo**. Per vedere anche il beta online serve o una seconda repo (`pigliabene-beta`), o pubblicare il beta in una sottocartella `/beta/`. Da decidere con Francesco.
+- **Nodo DNS:** su dominio nudo (`pigliabene.it`) il CNAME non è ammesso dalle specifiche DNS — servono i record A verso gli IP di GitHub; il CNAME vale per `www.pigliabene.it`. Molti registrar offrono ALIAS/ANAME che aggira la cosa. **Da chiedere a Francesco: quale dei due usiamo.**
+- Il dominio `pigliabene.it` risulta registrato? **n.d.** — da verificare.
 - Verifica: index, video-loop e font Arsenica scaricati dal sito e confrontati con i locali in **SHA256 → identici**; asset 200 con content-type corretto.
 - ⚠ Repo **pubblico** con Arsenica *Trial* incorporata: accettabile per la demo, **da risolvere prima di qualunque lancio** (licenza webfont Zetafonts o sostituzione).
 
@@ -17,12 +31,19 @@
 - [x] Cifre a quadratino risolte 6/8 con `unicode-range` (v. diario)
 - [ ] **Scelta font — tornata 2 in attesa di Gio**: 10 candidati ai pesi leggeri (11-20) in `font-test.html`. O si sceglie uno di questi, o si compra Arsenica.
 - [ ] ⚠ **Licenza Arsenica** — prezzo verificato 6/8: **Arsenica Light, licenza Web, fascia fino a 25k pageview/mese ≈ €35-50 una tantum, perpetua** (zetafonts.com/arsenica → Choose a License = solo Web; famiglia intera da €147; su MyFonts costa di più: $45/peso). La Trial serve a valutare, non a pubblicare, e la demo è già pubblica: **decisione da prendere, non da rimandare a lungo**.
+- [x] **Sbordo laterale su telefono risolto 18/8** (v0.3.1, v. diario) — resta da confermare con l'occhio di Gio su Android
+- [ ] **Pages da spostare da `gh-pages` a `main`** — una tendina in Settings → Pages, il token del connettore GitHub è morto e non posso farlo io
+- [ ] **Anteprima del beta online**: seconda repo o sottocartella `/beta/`? — da decidere con Francesco
+- [ ] **DNS `pigliabene.it`**: A record o ALIAS sul dominio nudo, CNAME solo su `www` — da chiedere a Francesco
+- [ ] **Catalogo dentro il sito**: se e come. Ipotesi Gio 18/8 — catalogo senza prezzi, poi listino aziende o listino privati a seconda di chi scrive
 - [ ] Verifica Gio su v0.2 (resto della pagina)
 - [ ] Watermark «a Natale» sul video prodotti: impresso dal sec ~1 a fine clip, non eliminabile via taglio → se serve pulito, riesportare da Canva senza layer testo
 - [ ] Loop video: durate pari (10,4s) ma senza JS i browser possono derivare lentamente la sincronia su sessioni lunghe
 - [ ] Decidere hosting/dominio definitivo (GitHub Pages è la casa della demo, non del sito vero)
 
 ## Diario
+- 2026-08-18 · **il sito sbordava di lato su tutti i telefoni.** Gio segnala da Android: la pagina «batte a destra», non è centrata, non scorre. Il video da iPhone mostra lo stesso difetto, solo meno vistoso. **Non è un problema di Android: è un errore di misura nel CSS.** I titoli avevano un fondo fisso in px — `h1: clamp(64px,…)`, `h2: clamp(40px,…)` — che sotto una certa larghezza non scende più. Misurato con fontTools sul file Arsenica reale: «SOLAMENTE» pesa **6,27 em**, cioè **401 px** a corpo 64, contro **312 px** disponibili su schermo da 360 → **89 px fuori**; su schermo da 320 sono 129. Il documento diventa più largo della finestra, e tutto ciò che è centrato con `margin:0 auto` (il blocco video) si centra sulla larghezza sbagliata: da qui il «non è centrato». **Fix v0.3.1:** fondo in px tolto (`h1:min(13.2vw,190px)`, `h2:clamp(30px,7vw,96px)`); `text-size-adjust:100%` perché Android Chrome ingrandisce di suo i testi lunghi; `overflow-x:clip` come rete — **clip e non hidden**, che romperebbe lo `sticky` dell'header; hero in `svh` e vuoti verticali ridotti sotto i 640px, perché su Android la barra dell'indirizzo si ritira e le `vh` cambiavano misura mentre si scorre. Verifica: script che rilegge il CSS **dal file** e rimisura tutte e 9 le righe di titolo su 12 larghezze da 320 a 1920 → **zero sbordi** (prima: 6 larghezze su 12 KO). Backup del file pre-fix in `_backups/`.
+- 2026-08-18 · **branch `main` creato** (v. sezione Branch). Struttura chiesta da Gio, avallata da Francesco Saverio via Telegram.
 - 2026-08-06/07 · **le cifre erano quadratini.** Nei contatti il telefono si leggeva `▯▯▯▯ ▯▯▯▯▯▯▯`. Verificato con fontTools: nella Trial le dieci cifre esistono nel cmap ma hanno **tutte lo stesso identico contorno** (bounds 31,-11,608,570) — Zetafonts le ha sostituite di proposito con un segnaposto. Sono gli **unici** caratteri bloccati (più U+F8FF, irrilevante): lettere, accenti e punteggiatura sono integri. Fix: `unicode-range:U+0-2F,U+3A-10FFFF` sui tre @font-face → le cifre cadono su Montserrat **in tutta la pagina**, non solo nei contatti. Con la licenza si toglie l'unicode-range e tornano in Arsenica.
 - 2026-08-06/07 · **contatti**: una sola riga «Telefono / WhatsApp» sul fisso 0575 1694910 (link `wa.me`), nessun numero personale. · **font-test v2.0**: tornata 2 con 10 candidati ai pesi leggeri (11-20, tutti verificati caricati nel browser), tornata 1 conservata sotto per confronto. · **prezzi licenza Arsenica verificati** (v. open loops). · Domanda di Gio sul farsi un font in proprio: **Lightroom non c'entra** (sviluppa fotografie); gli strumenti sono Glyphs/FontLab/Fontself, ma un serif decente è lavoro di mesi → **parcheggiato da Gio**.
 - 2026-08-05 02:05 · **PUBBLICATA la demo su GitHub Pages.** Token del connettore GitHub morto anche in sessione nuova (401 su `get_me`) → repo creato **a mano dal browser** (github.com/new, loggato Gio-227); push da PowerShell **senza autorizzazione browser**: la credenziale `git:https://github.com` era già in Windows Credential Manager. Push `beta` (~65 MB, ~3 min) + `beta:gh-pages`; Pages **si è attivato da solo** sul branch gh-pages. Verifica per hash SHA256 locale↔online: identici.
