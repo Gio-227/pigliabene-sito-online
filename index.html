@@ -229,9 +229,11 @@
      DATI STRUTTURATI — qui il sito dice a Google, e ai motori di ricerca
      interni degli agenti AI, chi siamo, dove siamo e cosa facciamo, in una
      forma che una macchina legge senza doverla interpretare.
-     Nessun dato inventato: gli ORARI mancano di proposito, si aggiungono
-     quando Gio li conferma (blocco openingHoursSpecification pronto sotto,
-     commentato). Stessa cosa per le coordinate geografiche.
+     Orari presi dalla scheda Google del locale (Gio, 31/8). Chi chiude a
+     mezzanotte si scrive 23:59, non 00:00, che verrebbe letto come «chiuso»;
+     i giorni di chiusura si dichiarano invece proprio con 00:00-00:00.
+     NON si mette il voto medio delle recensioni: il proprio voto sul proprio
+     sito Google lo considera autoreferenziale, e sanziona.
      ========================================================================== -->
 <script type="application/ld+json">
 {
@@ -265,6 +267,16 @@
       "email": "bottegapigliabene@gmail.com",
       "telephone": "+39 0575 1694910",
       "currenciesAccepted": "EUR",
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Thursday","Sunday"], "opens": "18:00", "closes": "22:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "18:00", "closes": "23:59" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday"], "opens": "00:00", "closes": "00:00" }
+      ],
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Tavoli all'aperto", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Musica dal vivo", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Happy hour", "value": true }
+      ],
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Via Giordano Bruno 47",
@@ -282,7 +294,8 @@
       ],
       "sameAs": [
         "https://www.instagram.com/piglia.bene/",
-        "https://www.facebook.com/p/Piglia-Bene-61571288159976/"
+        "https://www.facebook.com/p/Piglia-Bene-61571288159976/",
+        "https://maps.google.com/?cid=80988256673183425"
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
@@ -310,14 +323,6 @@
   ]
 }
 </script>
-<!-- ORARI — da incollare dentro il nodo "#bottega" quando Gio li conferma:
-     "openingHoursSpecification": [
-       { "@type": "OpeningHoursSpecification",
-         "dayOfWeek": ["Monday","Tuesday"],
-         "opens": "00:00", "closes": "00:00" }
-     ],
-     Sono il campo che Google mostra per primo nella scheda locale.
--->
 </head>
 <body>
 
