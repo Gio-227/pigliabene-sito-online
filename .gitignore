@@ -1,3 +1,9 @@
 # Note interne del fascicolo: mai nel repo pubblico
 *.md
 _backups/
+
+# Il dominio vive SOLO su main. Se il file CNAME finisse anche sul repo
+# pigliabene-beta, GitHub gli lascerebbe rivendicare www.pigliabene.it e il
+# sito di produzione resterebbe senza casa. Su main e' gia' tracciato: la
+# riga qui sotto non lo tocca, impedisce solo di aggiungerlo per sbaglio altrove.
+CNAME

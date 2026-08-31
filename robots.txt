@@ -1,0 +1,17 @@
+# Piglia Bene — Feel Good S.r.l. — Sansepolcro (AR)
+#
+# NOTA: un robots.txt vale solo alla radice di un dominio. Finché il sito sta
+# su gio-227.github.io/pigliabene-sito-online/ questo file è decorativo: la
+# radice è di GitHub, non nostra. Diventa effettivo il giorno in cui risponde
+# www.pigliabene.it.
+#
+# Scelta deliberata: NON blocchiamo i crawler degli assistenti AI. Sono loro a
+# costruire le risposte che la gente legge al posto dei risultati di ricerca;
+# tenerli fuori significa non esistere in quelle risposte. Se un giorno si
+# volesse il contrario, si negano qui per nome (GPTBot, ClaudeBot, PerplexityBot,
+# Google-Extended, Applebot-Extended, CCBot).
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.pigliabene.it/sitemap.xml

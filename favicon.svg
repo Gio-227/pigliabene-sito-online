@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Piglia Bene">
+  <rect width="64" height="64" fill="#9B0E0E"/>
+  <rect x="7" y="7" width="50" height="50" fill="none" stroke="#F7F4DC" stroke-width="2.5"/>
+  <text x="32" y="27.5" text-anchor="middle" fill="#F7F4DC"
+        font-family="Georgia, 'Times New Roman', serif" font-size="17" letter-spacing="1">PIGLIA</text>
+  <text x="32" y="46" text-anchor="middle" fill="#F7F4DC"
+        font-family="Georgia, 'Times New Roman', serif" font-size="17" letter-spacing="1">BENE</text>
+</svg>

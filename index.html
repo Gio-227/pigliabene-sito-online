@@ -6,15 +6,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Piglia Bene — Vineria, Bottega, Catering &amp; Eventi · Sansepolcro</title>
 <meta name="description" content="Piglia Bene: vineria, bottega e catering a Sansepolcro. Eventi aziendali e privati, selezione vini, artigiani del gusto.">
+
+<!-- ==========================================================================
+     INDIRIZZO DEL SITO — dal 31/8 è www.pigliabene.it: i record DNS li ha
+     scritti Nibble (4 A sull'apice + CNAME www e catalogo, proxy spento),
+     e il file CNAME in radice dice a GitHub di rispondere a questo nome.
+     GitHub reindirizza da solo sia il vecchio gio-227.github.io sia l'apice.
+     ========================================================================== -->
+<link rel="canonical" href="https://www.pigliabene.it/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#9B0E0E">
+<meta name="geo.region" content="IT-AR">
+<meta name="geo.placename" content="Sansepolcro">
+
+<!-- Anteprima del link su WhatsApp, Telegram, Facebook, Instagram. -->
+<meta property="og:type" content="business.business">
+<meta property="og:site_name" content="Piglia Bene">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="Piglia Bene — Vineria, Bottega, Catering &amp; Eventi · Sansepolcro">
+<meta property="og:description" content="Vineria, bottega e catering a Sansepolcro. Oltre 500 etichette, artigiani del gusto, eventi aziendali e privati in Valtiberina.">
+<meta property="og:url" content="https://www.pigliabene.it/">
+<meta property="og:image" content="https://www.pigliabene.it/media/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bottiglie sullo scaffale della bottega Piglia Bene, Sansepolcro">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /* Arsenica (Zetafonts, versione Trial dal PC — licenza da regolarizzare prima della pubblicazione)
      unicode-range esclude le cifre U+0030-0039: nella Trial sono tutte sostituite da un quadratino
      segnaposto (stessa sagoma per tutte e dieci). Così i numeri cadono su Montserrat.
      Con la licenza acquistata: togliere unicode-range e i numeri torneranno in Arsenica. */
-  @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Thin.ttf') format('truetype');font-weight:200;font-display:swap;unicode-range:U+0-2F,U+3A-10FFFF}
+  /* 31/8: tolti i @font-face di Thin (200) e Regular (400). Erano dichiarati ma
+     nessuna regola li chiamava — tutte e sei le righe che usano Arsenica sono a
+     peso 300. Restava mezzo mega di font scaricato per niente, e due file Trial
+     esposti su un repo pubblico. Da licenziare: UN solo stile, Arsenica Light. */
   @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Light.ttf') format('truetype');font-weight:300;font-display:swap;unicode-range:U+0-2F,U+3A-10FFFF}
-  @font-face{font-family:'Arsenica';src:url('media/fonts/ArsenicaTrial-Regular.ttf') format('truetype');font-weight:400;font-display:swap;unicode-range:U+0-2F,U+3A-10FFFF}
 
   :root{
     --rosso:#9B0E0E;
@@ -176,6 +209,100 @@
     h2{margin-bottom:4vh}
   }
 </style>
+
+<!-- ==========================================================================
+     DATI STRUTTURATI — qui il sito dice a Google, e ai motori di ricerca
+     interni degli agenti AI, chi siamo, dove siamo e cosa facciamo, in una
+     forma che una macchina legge senza doverla interpretare.
+     Nessun dato inventato: gli ORARI mancano di proposito, si aggiungono
+     quando Gio li conferma (blocco openingHoursSpecification pronto sotto,
+     commentato). Stessa cosa per le coordinate geografiche.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.pigliabene.it/#azienda",
+      "name": "Feel Good S.r.l.",
+      "alternateName": "Piglia Bene",
+      "url": "https://www.pigliabene.it/",
+      "email": "bottegapigliabene@gmail.com",
+      "telephone": "+39 0575 1694910",
+      "vatID": "IT02434040511",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Giordano Bruno 47",
+        "addressLocality": "Sansepolcro",
+        "addressRegion": "AR",
+        "postalCode": "52037",
+        "addressCountry": "IT"
+      }
+    },
+    {
+      "@type": ["LiquorStore", "BarOrPub"],
+      "@id": "https://www.pigliabene.it/#bottega",
+      "name": "Piglia Bene",
+      "description": "Vineria, bottega e catering a Sansepolcro, in Valtiberina. Oltre 500 etichette in selezione, prodotti di artigiani del gusto, catering ed eventi per aziende e privati.",
+      "url": "https://www.pigliabene.it/",
+      "image": "https://www.pigliabene.it/media/og-preview.jpg",
+      "email": "bottegapigliabene@gmail.com",
+      "telephone": "+39 0575 1694910",
+      "currenciesAccepted": "EUR",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Giordano Bruno 47",
+        "addressLocality": "Sansepolcro",
+        "addressRegion": "AR",
+        "postalCode": "52037",
+        "addressCountry": "IT"
+      },
+      "parentOrganization": { "@id": "https://www.pigliabene.it/#azienda" },
+      "areaServed": [
+        { "@type": "City", "name": "Sansepolcro" },
+        { "@type": "AdministrativeArea", "name": "Valtiberina" },
+        { "@type": "AdministrativeArea", "name": "Provincia di Arezzo" },
+        { "@type": "AdministrativeArea", "name": "Alta Valle del Tevere" }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/piglia.bene/",
+        "https://www.facebook.com/p/Piglia-Bene-61571288159976/"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servizi Piglia Bene",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Aperitivo open bar", "description": "Miscelati e vini." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ostriche, crudité e prosciutto a mano", "description": "Cibo e bevande per eventi." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Musica live e DJ set", "description": "Intrattenimento." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Allestimenti scenografici", "description": "Ospitalità." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Videomaker e fotografo", "description": "Multimedia." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Laboratori di pasta fresca, yoga e pilates", "description": "Team building." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pacchi aziendali e panettoni artigianali", "description": "Regalistica." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Selezione vini", "description": "Oltre 500 etichette." } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.pigliabene.it/#sito",
+      "url": "https://www.pigliabene.it/",
+      "name": "Piglia Bene",
+      "inLanguage": "it-IT",
+      "publisher": { "@id": "https://www.pigliabene.it/#azienda" }
+    }
+  ]
+}
+</script>
+<!-- ORARI — da incollare dentro il nodo "#bottega" quando Gio li conferma:
+     "openingHoursSpecification": [
+       { "@type": "OpeningHoursSpecification",
+         "dayOfWeek": ["Monday","Tuesday"],
+         "opens": "00:00", "closes": "00:00" }
+     ],
+     Sono il campo che Google mostra per primo nella scheda locale.
+-->
 </head>
 <body>
 
@@ -199,10 +326,10 @@
 <section aria-label="Video">
   <div class="video-wrap">
     <figure>
-      <video src="media/natale25-loop.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="media/natale25-loop.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Confezioni e prodotti natalizi della bottega Piglia Bene"></video>
     </figure>
     <figure>
-      <video src="media/scarrellata-loop.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="media/scarrellata-loop.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Scaffali della bottega: conserve, vini e prodotti di artigiani del gusto"></video>
     </figure>
   </div>
 </section>
