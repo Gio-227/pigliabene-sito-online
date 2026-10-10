@@ -2,17 +2,16 @@
    Dopo una modifica: commit + push; GitHub Pages può servire la versione vecchia per qualche minuto.
    Date in formato AAAA-MM-GG. Un campo vuoto = in pagina compare il segnaposto fra [quadre]. */
 window.PB_NATALE = {
-  // URL dell'App web di Apps Script (finisce con /exec). Vuoto = il cancello si apre lo stesso, ma la richiesta
-  // NON viene registrata da nessuna parte e nessuna mail parte (dal 09/10/2026 la pagina non apre più la posta da sola).
-  ENDPOINT: "",
+  // URL dell'App web di Apps Script «Porta di Natale» (finisce con /exec). Dal 11/10/2026 (accesso a codice) è lo script
+  // a mandare il codice per email e i prezzi a chi ha fatto l'accesso: vuoto = nessuno vede i prezzi.
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbxDaWOgGDVe6nsrJ3ADb3Yogi04Z9Wz3jiydd1Cn8MdLSKaywXZhZ3m4j8v-DvliScyTw/exec",
 
   // Il catalogo resta sul beta, noindex, e non si indovina.
   CATALOGO_URL: "https://gio-227.github.io/pigliabene-beta/catalogo/",
   // La porta 01, le confezioni pronte: pagina sorella della stanza.
   CONFEZIONI_URL: "confezioni/",
 
-  // Con il link personale (/natale/Nome-Azienda) l'email è già nota a chi ha mandato il link:
-  // true = nel cancello diventa facoltativa; false = resta obbligatoria (regola di Gio del 05/10/2026, in attesa di una sua parola).
+  // Non più usato dal 11/10/2026: l'email è sempre obbligatoria e verificata con un codice (Gio, 10/10/2026 h23:2x).
   EMAIL_FACOLTATIVA_CON_LINK: false,
 
   EMAIL: "bottegapigliabene@gmail.com",

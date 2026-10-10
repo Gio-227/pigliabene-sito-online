@@ -265,6 +265,14 @@ form.modulo{display:grid;gap:14px}
 .modulo .piccolo{font-size:12px;margin:0;opacity:.8}
 .modulo .esito{font-size:13.5px;font-weight:600;border-left:4px solid var(--inchiostro);padding-left:12px}
 .modulo .esito:empty{display:none}
+/* accesso a codice (natale/accesso.js, 11/10/2026) */
+.modulo[hidden],.cancello .perche[hidden]{display:none!important}
+body.in-attesa .avviso-prezzi{display:none!important}
+.passo-altro{margin:2px 0 0;font-size:13px;line-height:1.5}
+.passo-link{background:none;border:0;padding:0;color:var(--inchiostro);font:700 13px/1.5 'Montserrat',sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.modulo input.codice{width:100%;max-width:13ch;font:700 28px/1.2 'Montserrat',sans-serif;letter-spacing:.35em;text-align:center;font-variant-numeric:tabular-nums;color:var(--inchiostro);background:#FFFDF2;border:2px solid var(--inchiostro);border-radius:0;padding:8px 10px;-webkit-appearance:none;appearance:none}
+.pb-avviso{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translate(-50%,200%);background:var(--inchiostro);color:var(--carta);font:700 13.5px/1.4 'Montserrat',sans-serif;padding:11px 16px;z-index:90;max-width:92vw;transition:transform .25s ease}
+.pb-avviso.vivo{transform:translate(-50%,0)}
 
 /* ───────── il piede come il sito (Gio, 09/10): condizioni, le porte, poi la riga di Feel Good */
 .piede{border-top:0;padding-top:0}
