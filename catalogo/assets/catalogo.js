@@ -203,7 +203,7 @@
   quale();
 })();
 
-/* ───────── i prezzi: li gestisce ../natale/accesso.js (email + codice, accesso personale; Gio 10/10/2026 h23:13).
+/* ───────── i prezzi: li gestisce accesso.js della porta di Natale (email + codice, accesso personale; Gio 10/10/2026 h23:13).
    Qui restano solo i link in fondo, che portano con sé il nome dell'azienda e l'origine (non i prezzi). */
 (function(){
   'use strict';
