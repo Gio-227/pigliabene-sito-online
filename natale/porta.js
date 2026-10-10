@@ -1,7 +1,7 @@
-/* Cowork v1.0 | Feel Good srl | Script comune delle pagine di Natale (natale/, natale/confezioni/) | v2.2 | 2026-10-10 17:30 CEST (v2.2 — Gio 17:22: il conto alla rovescia dice «giorni alla fine delle promozioni sui canvas»; date di riserva 05/11 e 20/11) - 2026-10-09 CEST (v2.1 — Gio 17:16: le porte si aprono senza dati; i prezzi restano coperti finché non si lasciano i dati, con l'avviso fisso; «Fai il conto» e la scheda PDF arrivano con i prezzi)
-   Fa quattro cose: legge da dove arriva chi visita (?da=, link personale), tiene acceso il punto giusto in testata,
-   gestisce il cancello (confezioni, prezzi e catalogo dopo i dati: Gio, 05/10/2026) e il conto delle confezioni.
-   Niente chiamate a terzi: l'unica è al modulo di Gio (ENDPOINT in config.js), e solo quando si preme Invia. */
+/* Cowork v1.0 | Feel Good srl | Script comune delle pagine di Natale (natale/, natale/confezioni/) | v3.0 | 2026-10-11 CEST (v3.0 — Gio 10/10 h23:13: il cancello passa ad accesso.js: email verificata con un codice, accesso personale, prezzi dallo script e non dalla pagina; ?aperto=1 non viaggia più fra le porte) - 2026-10-10 17:30 CEST (v2.2 — «giorni alla fine delle promozioni sui canvas»; date di riserva 05/11 e 20/11) - 2026-10-09 CEST (v2.1 — le porte si aprono senza dati; prezzi coperti con l'avviso fisso)
+   Fa tre cose: legge da dove arriva chi visita (?da=, link personale), tiene acceso il punto giusto in testata,
+   e fa il conto delle confezioni con i prezzi che arrivano da accesso.js (window.PBAccesso).
+   Niente chiamate a terzi da qui: lo script di Gio lo chiama solo accesso.js. */
 (function () {
   'use strict';
   var C = window.PB_NATALE || {};
@@ -129,9 +129,10 @@
     }
   }
 
-  /* --- fai il conto (pagina confezioni): la stessa regola della pagina Ordini del Database (Gio, 05/10/2026) --- */
-  function preparaConto() {
-    var box = $('calcola'), arts = document.querySelectorAll('article.canvas[data-prezzo]');
+  /* --- fai il conto (pagina confezioni): la stessa regola della pagina Ordini del Database (Gio, 05/10/2026).
+         I prezzi non stanno nella pagina: arrivano da accesso.js dopo l'accesso (chiave «c:<id canvas>»). --- */
+  function preparaConto(prezzi) {
+    var box = $('calcola'), arts = document.querySelectorAll('article.canvas[data-chiave]');
     if (!box || box.getAttribute('data-pronto')) return;
     box.setAttribute('data-pronto', '1');
     var chiuse = (dAn !== null && oggi > dAn) || (dCh !== null && oggi > dCh);
@@ -140,7 +141,8 @@
     var righe = [], cont = $('calc-righe');
     function euro(v) { return v.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'; }
     Array.prototype.forEach.call(arts, function (a, i) {
-      var r = { nome: a.getAttribute('data-nome') || '', prezzo: parseFloat(a.getAttribute('data-prezzo')), q: 0 };
+      var p = prezzi[a.getAttribute('data-chiave')];
+      var r = { nome: a.getAttribute('data-nome') || '', prezzo: p && typeof p[1] === 'number' ? p[1] : NaN, q: 0 };
       if (!(r.prezzo > 0)) return;
       var riga = document.createElement('div'); riga.className = 'calc-riga';
       var lab = document.createElement('label'); lab.htmlFor = 'q-' + i;
@@ -195,122 +197,19 @@
     }
   }
 
-  /* --- il cancello (Gio, 05/10/2026 14:50): confezioni, prezzi, conto e catalogo dopo i dati.
-         Si ricorda nel browser; ?aperto=1 arriva solo dalla mail che manda lo script di Gio.
-         È un cancello di cortesia per raccogliere i contatti, non una protezione: i file restano pubblici a chi ha l'indirizzo. --- */
-  var CHIAVE = 'pbNatale2026Aperto';
-  function giaAperto() {
-    if (q.get('aperto') === '1') return true;
-    try { return localStorage.getItem(CHIAVE) === '1'; } catch (e) { return false; }
-  }
-  function ricorda() { try { localStorage.setItem(CHIAVE, '1'); } catch (e) { } }
-  var catalogo = (C.CATALOGO_URL || 'https://gio-227.github.io/pigliabene-beta/catalogo/');
+  /* --- le porte: il nome dell'azienda e l'origine viaggiano con chi passa; i prezzi no (accesso.js, dal 11/10/2026) --- */
+  var catalogo = (C.CATALOGO_URL || 'https://www.pigliabene.it/natale/catalogo/');
   var confezioni = (C.CONFEZIONI_URL || 'confezioni/');
-  function conCoda(url, conAperto) {   // il nome dell'azienda, l'origine e, se c'è, il via libera ai prezzi viaggiano con chi passa la porta
-    var p = []; if (slug) p.push('per=' + encodeURIComponent(slug)); if (da) p.push('da=' + encodeURIComponent(da)); if (conAperto && giaAperto()) p.push('aperto=1');
+  function conCoda(url) {
+    var p = []; if (slug) p.push('per=' + encodeURIComponent(slug)); if (da) p.push('da=' + encodeURIComponent(da));
     return url + (p.length ? (url.indexOf('?') >= 0 ? '&' : '?') + p.join('&') : '');
   }
-  /* porte: data-porta="confezioni" | "catalogo" */
-  var destinazione = null;
-  function vaiA(porta) {
-    if (porta === 'catalogo') { window.open(catalogo, '_blank', 'noopener'); return; }
-    location.href = conCoda(confezioni);
-  }
-  var cancello = $('cancello');
-  function apriCancello(porta) {
-    destinazione = porta || null;
-    if (!cancello) return;
-    var titolo = $('cancello-h'); if (titolo) titolo.textContent = 'Vedi i prezzi';
-    if (typeof cancello.showModal === 'function') { if (!cancello.open) cancello.showModal(); }
-    else cancello.setAttribute('open', '');
-    var primo = cancello.querySelector('input:not([type=hidden]):not([type=checkbox]):not([type=radio])'); if (primo && !primo.value) primo.focus();
-  }
-  function chiudiCancello() { if (!cancello) return; if (typeof cancello.close === 'function' && cancello.open) cancello.close(); else cancello.removeAttribute('open'); }
-  /* le porte si aprono senza dati (Gio, 09/10/2026 17:16): si sfoglia tutto, i prezzi arrivano con i dati */
-  function sistemaPorte() {
-    Array.prototype.forEach.call(document.querySelectorAll('[data-porta]'), function (a) {
-      var porta = a.getAttribute('data-porta');
-      if (porta === 'catalogo') { a.href = conCoda(catalogo, true); a.target = '_blank'; a.rel = 'noopener'; }
-      else if (porta === 'confezioni') a.href = conCoda(confezioni, true);
-    });
-  }
-  sistemaPorte();
-  Array.prototype.forEach.call(document.querySelectorAll('[data-apri-cancello]'), function (b) { b.addEventListener('click', function () { apriCancello(''); }); });
-  /* un prezzo coperto, se lo tocchi, apre la finestra dei dati */
-  document.addEventListener('click', function (e) {
-    if (!body.classList.contains('senza-prezzi')) return;
-    var pz = e.target.closest && e.target.closest('.canvas .prezzo'); if (pz) { e.preventDefault(); apriCancello(''); }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-porta]'), function (a) {
+    var porta = a.getAttribute('data-porta');
+    if (porta === 'catalogo') { a.href = conCoda(catalogo); a.target = '_blank'; a.rel = 'noopener'; }
+    else if (porta === 'confezioni') a.href = conCoda(confezioni);
   });
-  Array.prototype.forEach.call(document.querySelectorAll('[data-chiudi-cancello]'), function (b) { b.addEventListener('click', chiudiCancello); });
-  if (cancello) cancello.addEventListener('click', function (e) { if (e.target === cancello) chiudiCancello(); });
 
-  /* pagina confezioni: tutto a vista; i prezzi, il conto e la scheda PDF dopo i dati */
-  function scopri() {
-    body.classList.remove('senza-prezzi');
-    var av = $('avviso-prezzi'); if (av) av.hidden = true;
-    preparaConto();
-  }
-  if (pagina === 'confezioni') {
-    if (giaAperto()) { ricorda(); scopri(); }
-    else body.classList.add('senza-prezzi');
-  }
-
-  /* --- il modulo del cancello --- */
-  var f = $('modulo'), esito = $('esito'), invia = $('invia');
-  if (f) {
-    $('f-origine').value = origine;
-    var reMail = /^[^\s@<>()",;:]+@[^\s@<>()",;:]+\.[a-z]{2,}$/i;
-    var emailObbl = !(per && C.EMAIL_FACOLTATIVA_CON_LINK);
-    if (!emailObbl) { var le = document.querySelector('label[for=f-email] .obb'); if (le) le.textContent = '(facoltativa: ce l’hai già data)'; $('f-email').required = false; }
-    function campo(id) { return $(id).closest('.campo'); }
-    function segna(id, ok) { var c = campo(id); if (c) c.classList.toggle('campo-err', !ok); $(id).setAttribute('aria-invalid', ok ? 'false' : 'true'); return ok; }
-    function dati() {
-      var r = f.querySelector('input[name=quantita]:checked');
-      return {
-        nome: $('f-nome').value.trim(), azienda: $('f-azienda').value.trim(), email: $('f-email').value.trim(),
-        telefono: $('f-tel').value.trim(), quantita: r ? r.value : '', messaggio: ($('f-msg') ? $('f-msg').value : '').trim().slice(0, 1000),
-        privacy: $('f-privacy').checked, aggiornamenti: $('f-agg').checked, origine: origine, per: per,
-        porta: destinazione || '', sito: $('f-sito').value, pagina: location.pathname, ua: (navigator.userAgent || '').slice(0, 300), t: Date.now() - t0
-      };
-    }
-    function valida(d) {
-      var ok = true, primo = null;
-      [['f-nome', !!d.nome], ['f-azienda', !!d.azienda], ['f-email', emailObbl ? reMail.test(d.email) : (!d.email || reMail.test(d.email))], ['f-privacy', d.privacy]].forEach(function (x) {
-        if (!segna(x[0], x[1])) { ok = false; if (!primo) primo = x[0]; }
-      });
-      if (primo) $(primo).focus();
-      return ok;
-    }
-    ['f-nome', 'f-azienda', 'f-email', 'f-privacy'].forEach(function (id) {
-      $(id).addEventListener(id === 'f-privacy' ? 'change' : 'blur', function () {
-        if (!campo(id).classList.contains('campo-err')) return;
-        var d = dati(); segna(id, id === 'f-email' ? (emailObbl ? reMail.test(d.email) : (!d.email || reMail.test(d.email))) : id === 'f-privacy' ? d.privacy : !!$(id).value.trim());
-      });
-    });
-    function mostra(testo) { esito.textContent = ''; var p = document.createElement('p'); p.textContent = testo; esito.appendChild(p); }
-    function attesa(on) { invia.disabled = on; invia.textContent = on ? 'Un momento…' : 'Vedi i prezzi'; }
-    function dopo() {
-      ricorda(); chiudiCancello(); scopri(); sistemaPorte();
-      mostra('Fatto: prezzi, conto e scheda sono aperti.');
-    }
-    f.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var d = dati();
-      if (!valida(d)) { mostra('Mancano dei dati: li trovi segnati sopra.'); return; }
-      if (d.sito) { dopo(); return; }   // esca: un programma, non una persona
-      if (!C.ENDPOINT) { dopo(); return; }   // modulo di Gio non ancora attivo: la porta si apre lo stesso; i dati non vengono registrati (niente posta che si apre da sola: Gio, 09/10/2026)
-      attesa(true);
-      var corpo = JSON.stringify(d);
-      var ctrl = ('AbortController' in window) ? new AbortController() : null;
-      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);
-      fetch(C.ENDPOINT, { method: 'POST', body: corpo, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, signal: ctrl ? ctrl.signal : undefined })
-        .then(function (r) { return r.json(); })
-        .then(function () { clearTimeout(timer); attesa(false); dopo(); })
-        .catch(function () {
-          fetch(C.ENDPOINT, { method: 'POST', body: corpo, mode: 'no-cors' })
-            .then(function () { clearTimeout(timer); attesa(false); dopo(); })
-            .catch(function () { clearTimeout(timer); attesa(false); dopo(); });
-        });
-    });
-  }
+  /* --- pagina confezioni: «Fai il conto» quando arrivano i prezzi --- */
+  if (pagina === 'confezioni' && window.PBAccesso) window.PBAccesso.quando(preparaConto);
 })();

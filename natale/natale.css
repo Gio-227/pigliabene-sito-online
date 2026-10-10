@@ -1,4 +1,4 @@
-/* Cowork v1.0 | Feel Good srl | Foglio di stile delle pagine di Natale (natale/, natale/confezioni/) | v2.3 | 2026-10-10 CEST (v2.3 — Gio 14:06: schede delle confezioni più leggere: cornice 2 px, rosso pieno solo dietro il titolo, descrizione su panna, filetto sotto la testa 1 px più sottile del filo spesso) - 2026-10-10 CEST (v2.2 — Gio 02:13: il titolo attacca alla stessa altezza e con la stessa misura di «Solamente i soliti noti?»: stesso box dell'hero della home, con l'attacco calcolato sul contenuto della home) - 2026-10-09 CEST (v2.1 — Gio 17:16: si sfoglia tutto senza dati, i prezzi restano coperti e un avviso ridotto resta a vista; porta 02 in fondo alle confezioni più visibile)
+/* Cowork v1.0 | Feel Good srl | Foglio di stile delle pagine di Natale (natale/, natale/confezioni/) | v2.4 | 2026-10-11 CEST (v2.4 — accesso a codice: il passo del codice nella finestra, l'avviso breve, il caricamento dei prezzi) - 2026-10-10 CEST (v2.3 — Gio 14:06: schede delle confezioni più leggere: cornice 2 px, rosso pieno solo dietro il titolo, descrizione su panna, filetto sotto la testa 1 px più sottile del filo spesso) - 2026-10-10 CEST (v2.2 — Gio 02:13: il titolo attacca alla stessa altezza e con la stessa misura di «Solamente i soliti noti?»: stesso box dell'hero della home, con l'attacco calcolato sul contenuto della home) - 2026-10-09 CEST (v2.1 — Gio 17:16: si sfoglia tutto senza dati, i prezzi restano coperti e un avviso ridotto resta a vista; porta 02 in fondo alle confezioni più visibile)
    Stessa cornice della home (testata, piede, Arsenica Light nei titoli, Montserrat nel resto, fondo panna e inchiostro rosso).
    Le variabili hanno i nomi "invertiti" come nella home del 17/09: --rosso è il FONDO (panna), --panna è l'INCHIOSTRO (rosso).
    Dopo una modifica: il link al foglio porta ?v=<sha1 breve del contenuto>, altrimenti il browser serve il CSS vecchio. */
@@ -327,3 +327,13 @@ footer.piede .copy{flex-basis:100%}
   h2{margin-bottom:4vh}
   footer.piede{justify-content:flex-start;row-gap:6px;padding-bottom:12vh}
 }
+
+/* ---------- l'accesso a codice (accesso.js, 11/10/2026): dati → codice per email → prezzi dallo script ---------- */
+.modulo[hidden],.cancello .perche[hidden]{display:none!important}
+body.in-attesa .avviso-prezzi{display:none!important}
+.passo-altro{margin:2px 0 0;font-size:14px;line-height:1.5;color:var(--panna-soft)}
+.passo-link{background:none;border:0;padding:0;color:var(--panna);font:700 14px/1.5 'Montserrat',sans-serif;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.passo-link:hover{color:#fff}
+.modulo input.codice{width:100%;max-width:13ch;font:700 30px/1.2 'Montserrat',sans-serif;letter-spacing:.35em;text-align:center;font-variant-numeric:tabular-nums;color:var(--panna);background:transparent;border:2px solid var(--panna);border-radius:0;padding:8px 10px;-webkit-appearance:none;appearance:none}
+.pb-avviso{position:fixed;left:50%;bottom:calc(max(18px,env(safe-area-inset-bottom)) + 64px);transform:translate(-50%,240%);background:var(--panna);color:var(--rosso);font:700 14px/1.4 'Montserrat',sans-serif;padding:12px 18px;z-index:90;max-width:92vw;transition:transform .25s ease;box-shadow:0 0 0 2px var(--rosso)}
+.pb-avviso.vivo{transform:translate(-50%,0)}
