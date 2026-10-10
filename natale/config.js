@@ -6,8 +6,8 @@ window.PB_NATALE = {
   // NON viene registrata da nessuna parte e nessuna mail parte (dal 09/10/2026 la pagina non apre più la posta da sola).
   ENDPOINT: "",
 
-  // Il catalogo resta sul beta, noindex, e non si indovina.
-  CATALOGO_URL: "https://gio-227.github.io/pigliabene-beta/catalogo/",
+  // Il catalogo sta in natale/catalogo/, noindex: ce lo porta prepara-main.py dal beta.
+  CATALOGO_URL: "https://www.pigliabene.it/natale/catalogo/",
   // La porta 01, le confezioni pronte: pagina sorella della stanza.
   CONFEZIONI_URL: "confezioni/",
 
