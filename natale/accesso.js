@@ -1,4 +1,5 @@
-/* Cowork v1.0 | Feel Good srl | Accesso ai prezzi di Natale 2026 (natale/confezioni/ e catalogo) | v1.1 | 2026-10-11 CEST
+/* Cowork v1.0 | Feel Good srl | Accesso ai prezzi di Natale 2026 (natale/confezioni/ e catalogo) | v1.1.1 | 2026-10-11 CEST
+   v1.1.1 (11/10/2026 h04:57): l'email ricordata si rilegge quando si apre la finestra e quando un'altra scheda fa l'accesso (prima la scheda aperta prima dell'accesso non trovava «Bentornato»).
    v1.1 (11/10/2026 h04, verifica notturna sul beta): B1 — «Mandami un altro codice» dopo il link della mail scaduto ora chiede
    un codice «solo» (prima mandava un'iscrizione senza nome e si bloccava su «Scrivi nome e cognome»); il campo del codice non
    ha più maxlength (un codice incollato o scritto con spazi veniva troncato a 4 cifre) e si invia da solo alla sesta cifra;
@@ -120,6 +121,7 @@
   window.addEventListener('storage', function (e) {
     if (e.key !== K_ACC && e.key !== K_PZ && e.key !== null) return;
     var nuovo = leggi(K_ACC);
+    var em = leggi(K_EM); if (typeof em === 'string' && em) emailRicordata = em;
     if (!accessoBuono(nuovo)) { if (acc) { acc = null; copri(); } return; }
     if (!acc || acc.token !== nuovo.token) {
       acc = nuovo; ultima = null; chiudi();
@@ -216,6 +218,7 @@
   }
   function apri() {
     if (!cancello) return;
+    var em = leggi(K_EM); if (typeof em === 'string' && em) emailRicordata = em;
     // con un codice già chiesto si torna al codice; chi è già entrato una volta da questo browser trova «Bentornato»
     mostra(ultima && passoCodice ? 'codice' : (emailRicordata && passoSolo ? 'solo' : 'dati'));
     if (typeof cancello.showModal === 'function') { if (!cancello.open) cancello.showModal(); }
