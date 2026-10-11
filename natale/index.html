@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Header Cowork v1.0 | Progetto: Feel Good srl | Tipo: pagina sito — la stanza di Natale 2026 (porta) | v2.2 | Generato: 2026-10-05 12:50 CEST | Aggiornato: 2026-10-10 17:30 CEST (v2.2 — Gio 17:22: promozioni sui canvas fino al 5/11, −7 % anticipato e chiusura ordini al 20/11; il conto dice «giorni alla fine delle promozioni sui canvas») - 2026-10-09 17:40 CEST (v2.1 — Gio 17:16: le porte si aprono senza dati, i prezzi arrivano con i dati nelle pagine delle porte) - 2026-10-09 CEST (v2.0 — Gio 09/10: stessa cornice della home (testata, piede, Arsenica), il nome dell'azienda in testa, pagina corta con due porte (confezioni → confezioni/, catalogo), cancello in finestra senza posta che si apre da sola, link puliti /natale/<azienda>, WhatsApp sempre a vista) - 2026-10-06 20:36 CEST (v1.3) - 2026-10-05 14:56 CEST (v1.2 — cancello) - 2026-10-05 14:27 CEST (v1.1) | Da: sessione 09/10 feedback UX/UI | fascicolo: pigliabene-sito-online + natale-2026 -->
+<!-- Header Cowork v1.0 | Progetto: Feel Good srl | Tipo: pagina sito — la stanza di Natale 2026 (porta) | v2.3 | Generato: 2026-10-05 12:50 CEST | Aggiornato: 2026-10-11 04:34 CEST (v2.3 — verifica notturna dell'accesso: meta referrer same-origin, impronte ?v= di porta.js v3.1 e natale.css v2.5) - 2026-10-10 17:30 CEST (v2.2 — Gio 17:22: promozioni sui canvas fino al 5/11, −7 % anticipato e chiusura ordini al 20/11; il conto dice «giorni alla fine delle promozioni sui canvas») - 2026-10-09 17:40 CEST (v2.1 — Gio 17:16: le porte si aprono senza dati, i prezzi arrivano con i dati nelle pagine delle porte) - 2026-10-09 CEST (v2.0 — Gio 09/10: stessa cornice della home (testata, piede, Arsenica), il nome dell'azienda in testa, pagina corta con due porte (confezioni → confezioni/, catalogo), cancello in finestra senza posta che si apre da sola, link puliti /natale/<azienda>, WhatsApp sempre a vista) - 2026-10-06 20:36 CEST (v1.3) - 2026-10-05 14:56 CEST (v1.2 — cancello) - 2026-10-05 14:27 CEST (v1.1) | Da: sessione 09/10 feedback UX/UI | fascicolo: pigliabene-sito-online + natale-2026 -->
 <!-- La stanza: tutto quello che serve per scegliere quale porta aprire. Le confezioni stanno in confezioni/, il catalogo dove dice config.js.
      Stile e script comuni: natale.css e porta.js (col ?v= dell'impronta: cambiano insieme al contenuto).
      Il modulo manda la richiesta all'Apps Script di Gio (config.js → ENDPOINT); se è vuoto la porta si apre lo stesso e nessuna posta si apre da sola.
@@ -11,6 +11,7 @@
 <title>Regali aziendali di Natale 2026 · Piglia Bene</title>
 <meta name="description" content="I regali aziendali di Natale di Piglia Bene, enoteca e vineria con catering a Sansepolcro: confezioni pronte a prezzo chiuso o su misura dal catalogo dei nostri produttori artigiani.">
 <meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="same-origin">
 <meta name="theme-color" content="#F7F4DC">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Piglia Bene">
@@ -22,7 +23,7 @@
 <meta property="og:image:height" content="630">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-<link rel="stylesheet" href="natale.css?v=bfcefa5c">
+<link rel="stylesheet" href="natale.css?v=f5af7fcb">
 </head>
 <body data-pagina="stanza">
 
@@ -120,6 +121,6 @@
 <a class="wa-fisso js-wa" href="https://wa.me/3905751694910" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4.5 20l1.2-3.7A8 8 0 1 1 8.4 19z"/></svg>WhatsApp</a>
 
 <script src="config.js?v=b9076038"></script>
-<script src="porta.js?v=17e621a2"></script>
+<script src="porta.js?v=6f64605b"></script>
 </body>
 </html>

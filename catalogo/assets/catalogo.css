@@ -227,7 +227,7 @@ body.senza-prezzi .pz::after{content:'€ ·· vedi';position:absolute;right:0;t
 body.senza-prezzi .avviso-prezzi{position:fixed;left:0;right:0;bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:58;display:flex;align-items:center;gap:10px;
   padding:9px var(--m);background:var(--inchiostro);color:var(--carta);font-size:13px;line-height:1.3;font-weight:600}
 .avviso-prezzi p{margin:0;flex:1}
-.avviso-prezzi button{flex:none;min-height:40px;padding:0 14px;background:var(--carta);color:var(--inchiostro);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.avviso-prezzi button{flex:none;min-height:44px;padding:0 14px;background:var(--carta);color:var(--inchiostro);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 body.pannello-aperto .avviso-prezzi{display:none}
 body.senza-prezzi .piede{padding-bottom:calc(150px + env(safe-area-inset-bottom,0px))}
 @media (min-width:860px){
@@ -269,7 +269,9 @@ form.modulo{display:grid;gap:14px}
 .modulo[hidden],.cancello .perche[hidden]{display:none!important}
 body.in-attesa .avviso-prezzi{display:none!important}
 .passo-altro{margin:2px 0 0;font-size:13px;line-height:1.5}
-.passo-link{background:none;border:0;padding:0;color:var(--inchiostro);font:700 13px/1.5 'Montserrat',sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.passo-link{background:none;border:0;padding:8px 0;margin:-8px 0;color:var(--inchiostro);font:700 13px/1.5 'Montserrat',sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.modulo .esito .esito-wa{font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+body.in-attesa .pz{opacity:.45}
 .modulo input.codice{width:100%;max-width:13ch;font:700 28px/1.2 'Montserrat',sans-serif;letter-spacing:.35em;text-align:center;font-variant-numeric:tabular-nums;color:var(--inchiostro);background:#FFFDF2;border:2px solid var(--inchiostro);border-radius:0;padding:8px 10px;-webkit-appearance:none;appearance:none}
 .pb-avviso{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translate(-50%,200%);background:var(--inchiostro);color:var(--carta);font:700 13.5px/1.4 'Montserrat',sans-serif;padding:11px 16px;z-index:90;max-width:92vw;transition:transform .25s ease}
 .pb-avviso.vivo{transform:translate(-50%,0)}

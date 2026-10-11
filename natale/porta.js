@@ -1,4 +1,4 @@
-/* Cowork v1.0 | Feel Good srl | Script comune delle pagine di Natale (natale/, natale/confezioni/) | v3.0 | 2026-10-11 CEST (v3.0 — Gio 10/10 h23:13: il cancello passa ad accesso.js: email verificata con un codice, accesso personale, prezzi dallo script e non dalla pagina; ?aperto=1 non viaggia più fra le porte) - 2026-10-10 17:30 CEST (v2.2 — «giorni alla fine delle promozioni sui canvas»; date di riserva 05/11 e 20/11) - 2026-10-09 CEST (v2.1 — le porte si aprono senza dati; prezzi coperti con l'avviso fisso)
+/* Cowork v1.0 | Feel Good srl | Script comune delle pagine di Natale (natale/, natale/confezioni/) | v3.1 | 2026-10-11 CEST (v3.1 — verifica notturna 11/10 h04: «Fai il conto» si ricostruisce ogni volta che arrivano i prezzi — prima si costruiva una volta sola, e una copia vecchia o incompleta nel browser lo lasciava con righe mancanti o con un prezzo non più valido; le quantità scritte sopravvivono; quando i prezzi si coprono il conto si svuota) - 2026-10-11 CEST (v3.0 — Gio 10/10 h23:13: il cancello passa ad accesso.js: email verificata con un codice, accesso personale, prezzi dallo script e non dalla pagina; ?aperto=1 non viaggia più fra le porte) - 2026-10-10 17:30 CEST (v2.2 — «giorni alla fine delle promozioni sui canvas»; date di riserva 05/11 e 20/11) - 2026-10-09 CEST (v2.1 — le porte si aprono senza dati; prezzi coperti con l'avviso fisso)
    Fa tre cose: legge da dove arriva chi visita (?da=, link personale), tiene acceso il punto giusto in testata,
    e fa il conto delle confezioni con i prezzi che arrivano da accesso.js (window.PBAccesso).
    Niente chiamate a terzi da qui: lo script di Gio lo chiama solo accesso.js. */
@@ -131,17 +131,30 @@
 
   /* --- fai il conto (pagina confezioni): la stessa regola della pagina Ordini del Database (Gio, 05/10/2026).
          I prezzi non stanno nella pagina: arrivano da accesso.js dopo l'accesso (chiave «c:<id canvas>»). --- */
+  var quantitaScritte = {};   // chiave → quantità: sopravvive quando il conto si ricostruisce coi prezzi nuovi
+  function svuotaConto() {
+    var box = $('calcola'), cont = $('calc-righe');
+    if (!box) return;
+    if (cont) cont.textContent = '';
+    if ($('calc-tot')) $('calc-tot').textContent = '';
+    if ($('calc-consiglio')) $('calc-consiglio').textContent = '';
+    if ($('calc-wa')) $('calc-wa').hidden = true;
+    box.hidden = true;
+    contoCorrente = null;
+  }
+  var contoCorrente = null;   // il «calcola» del conto costruito per ultimo: la spunta dell'anticipato chiama sempre quello
   function preparaConto(prezzi) {
     var box = $('calcola'), arts = document.querySelectorAll('article.canvas[data-chiave]');
-    if (!box || box.getAttribute('data-pronto')) return;
-    box.setAttribute('data-pronto', '1');
+    if (!box) return;
+    Array.prototype.forEach.call(document.querySelectorAll('#calc-righe input'), function (i) { var v = parseInt(i.value, 10); if (v > 0) quantitaScritte[i.getAttribute('data-chiave')] = v; });
+    svuotaConto();
     var chiuse = (dAn !== null && oggi > dAn) || (dCh !== null && oggi > dCh);
     if (!arts.length || chiuse) return;
     var entroSc = dSc !== null && oggi <= dSc;
     var righe = [], cont = $('calc-righe');
     function euro(v) { return v.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'; }
     Array.prototype.forEach.call(arts, function (a, i) {
-      var p = prezzi[a.getAttribute('data-chiave')];
+      var chiave = a.getAttribute('data-chiave'), p = prezzi[chiave];
       var r = { nome: a.getAttribute('data-nome') || '', prezzo: p && typeof p[1] === 'number' ? p[1] : NaN, q: 0 };
       if (!(r.prezzo > 0)) return;
       var riga = document.createElement('div'); riga.className = 'calc-riga';
@@ -150,7 +163,8 @@
       var pr = document.createElement('span'); pr.className = 'calc-prezzo'; pr.textContent = euro(r.prezzo) + ' a confezione';
       lab.appendChild(nm); lab.appendChild(pr);
       var inp = document.createElement('input'); inp.type = 'number'; inp.id = 'q-' + i; inp.min = '0'; inp.step = '1';
-      inp.inputMode = 'numeric'; inp.placeholder = '0'; inp.setAttribute('aria-label', 'Quante «' + r.nome + '»');
+      inp.inputMode = 'numeric'; inp.placeholder = '0'; inp.setAttribute('aria-label', 'Quante «' + r.nome + '»'); inp.setAttribute('data-chiave', chiave);
+      if (quantitaScritte[chiave]) inp.value = quantitaScritte[chiave];
       var out = document.createElement('span'); out.className = 'r-esito';
       riga.appendChild(lab); riga.appendChild(out); riga.appendChild(inp);
       cont.appendChild(riga);
@@ -158,8 +172,11 @@
       inp.addEventListener('input', calcola);
     });
     if (!righe.length) return;
-    $('calc-ant').addEventListener('change', calcola);
+    contoCorrente = calcola;
+    var ant = $('calc-ant');
+    if (ant && !ant.getAttribute('data-ascolta')) { ant.setAttribute('data-ascolta', '1'); ant.addEventListener('change', function () { if (contoCorrente) contoCorrente(); }); }
     box.hidden = false;
+    if (righe.some(function (r) { return r.inp.value; })) calcola();
     function voce(dl, k, v, cls) {
       var d = document.createElement('div'); if (cls) d.className = cls;
       var t = document.createElement('dt'); t.textContent = k; var x = document.createElement('dd'); x.textContent = v;
@@ -211,5 +228,8 @@
   });
 
   /* --- pagina confezioni: «Fai il conto» quando arrivano i prezzi --- */
-  if (pagina === 'confezioni' && window.PBAccesso) window.PBAccesso.quando(preparaConto);
+  if (pagina === 'confezioni' && window.PBAccesso) {
+    window.PBAccesso.quando(preparaConto);
+    if (window.PBAccesso.quandoCoperti) window.PBAccesso.quandoCoperti(function () { preparaConto({}); });   // prezzi coperti: il conto si svuota
+  }
 })();
