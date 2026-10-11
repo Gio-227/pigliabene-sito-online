@@ -1,4 +1,5 @@
-/* Cowork v1.0 | Feel Good srl | Accesso ai prezzi di Natale 2026 (natale/confezioni/ e catalogo) | v1.1.1 | 2026-10-11 CEST
+/* Cowork v1.0 | Feel Good srl | Accesso ai prezzi di Natale 2026 (natale/confezioni/ e catalogo) | v1.1.2 | 2026-10-11 CEST
+   v1.1.2 (11/10/2026 h05:23, controllo indipendente): mentre i prezzi di chi è già dentro si caricano, un tocco su un prezzo non apre la finestra.
    v1.1.1 (11/10/2026 h04:57): l'email ricordata si rilegge quando si apre la finestra e quando un'altra scheda fa l'accesso (prima la scheda aperta prima dell'accesso non trovava «Bentornato»).
    v1.1 (11/10/2026 h04, verifica notturna sul beta): B1 — «Mandami un altro codice» dopo il link della mail scaduto ora chiede
    un codice «solo» (prima mandava un'iscrizione senza nome e si bloccava su «Scrivi nome e cognome»); il campo del codice non
@@ -239,7 +240,7 @@
   Array.prototype.forEach.call(document.querySelectorAll('[data-chiudi-cancello]'), function (b) { b.addEventListener('click', chiudi); });
   if (cancello) cancello.addEventListener('click', function (e) { if (e.target === cancello) chiudi(); });
   document.addEventListener('click', function (e) {   // un prezzo coperto, se lo tocchi, apre la finestra
-    if (!body.classList.contains('senza-prezzi')) return;
+    if (!body.classList.contains('senza-prezzi') || body.classList.contains('in-attesa')) return;
     var pz = e.target.closest && e.target.closest('[data-pz], .canvas .prezzo, .pz');
     if (pz) { e.preventDefault(); apri(); }
   });

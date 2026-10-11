@@ -1,4 +1,4 @@
-/* Cowork v1.0 | Feel Good srl | Script comune delle pagine di Natale (natale/, natale/confezioni/) | v3.1 | 2026-10-11 CEST (v3.1 — verifica notturna 11/10 h04: «Fai il conto» si ricostruisce ogni volta che arrivano i prezzi — prima si costruiva una volta sola, e una copia vecchia o incompleta nel browser lo lasciava con righe mancanti o con un prezzo non più valido; le quantità scritte sopravvivono; quando i prezzi si coprono il conto si svuota) - 2026-10-11 CEST (v3.0 — Gio 10/10 h23:13: il cancello passa ad accesso.js: email verificata con un codice, accesso personale, prezzi dallo script e non dalla pagina; ?aperto=1 non viaggia più fra le porte) - 2026-10-10 17:30 CEST (v2.2 — «giorni alla fine delle promozioni sui canvas»; date di riserva 05/11 e 20/11) - 2026-10-09 CEST (v2.1 — le porte si aprono senza dati; prezzi coperti con l'avviso fisso)
+/* Cowork v1.0 | Feel Good srl | Script comune delle pagine di Natale (natale/, natale/confezioni/) | v3.1.1 | 2026-10-11 CEST (v3.1.1 — controllo indipendente h05:20: una riga svuotata resta svuotata quando il conto si ricostruisce; dopo la copertura anche il link WhatsApp del conto si azzera) - 2026-10-11 CEST (v3.1 — verifica notturna 11/10 h04: «Fai il conto» si ricostruisce ogni volta che arrivano i prezzi — prima si costruiva una volta sola, e una copia vecchia o incompleta nel browser lo lasciava con righe mancanti o con un prezzo non più valido; le quantità scritte sopravvivono; quando i prezzi si coprono il conto si svuota) - 2026-10-11 CEST (v3.0 — Gio 10/10 h23:13: il cancello passa ad accesso.js: email verificata con un codice, accesso personale, prezzi dallo script e non dalla pagina; ?aperto=1 non viaggia più fra le porte) - 2026-10-10 17:30 CEST (v2.2 — «giorni alla fine delle promozioni sui canvas»; date di riserva 05/11 e 20/11) - 2026-10-09 CEST (v2.1 — le porte si aprono senza dati; prezzi coperti con l'avviso fisso)
    Fa tre cose: legge da dove arriva chi visita (?da=, link personale), tiene acceso il punto giusto in testata,
    e fa il conto delle confezioni con i prezzi che arrivano da accesso.js (window.PBAccesso).
    Niente chiamate a terzi da qui: lo script di Gio lo chiama solo accesso.js. */
@@ -138,7 +138,7 @@
     if (cont) cont.textContent = '';
     if ($('calc-tot')) $('calc-tot').textContent = '';
     if ($('calc-consiglio')) $('calc-consiglio').textContent = '';
-    if ($('calc-wa')) $('calc-wa').hidden = true;
+    if ($('calc-wa')) { $('calc-wa').hidden = true; $('calc-wa').href = '#'; }
     box.hidden = true;
     contoCorrente = null;
   }
@@ -146,7 +146,7 @@
   function preparaConto(prezzi) {
     var box = $('calcola'), arts = document.querySelectorAll('article.canvas[data-chiave]');
     if (!box) return;
-    Array.prototype.forEach.call(document.querySelectorAll('#calc-righe input'), function (i) { var v = parseInt(i.value, 10); if (v > 0) quantitaScritte[i.getAttribute('data-chiave')] = v; });
+    Array.prototype.forEach.call(document.querySelectorAll('#calc-righe input'), function (i) { var v = parseInt(i.value, 10); quantitaScritte[i.getAttribute('data-chiave')] = v > 0 ? v : 0; });
     svuotaConto();
     var chiuse = (dAn !== null && oggi > dAn) || (dCh !== null && oggi > dCh);
     if (!arts.length || chiuse) return;
