@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Cowork v1.0 | Feel Good srl | Landing page Piglia Bene — v0.7 (aperitivo: «Aperitivo a Sansepolcro» in titolo, description e prima riga; nei contatti orari e «Dove siamo» con la scheda Google; email info@pigliabene.it; Gio 12/10 «lavora in beta») | 2026-10-12 23:10 CEST | v0.6 (testata: il punto in cui sei resta acceso — Chi siamo, Servizi, Contatti seguono lo scorrimento, Natale è acceso solo sulla sua pagina; su telefono la testata scompare scorrendo in giù e torna scorrendo in su; Gio, 09/10) | 2026-10-09 CEST | v0.5 (testata anche sul telefono: Chi siamo, Servizi, Contatti e il bottone Natale; gli ancoraggi si fermano sotto la testata) | 2026-10-06 20:36 CEST | v0.4 (veste invertita: fondo panna, inchiostro rosso) 2026-09-17 12:35 CEST | fascicolo: pigliabene-sito-online (branch main = produzione) -->
+<!-- Cowork v1.0 | Feel Good srl | Landing page Piglia Bene — v0.9 (bottone PREORDINI accanto a Natale, sempre rosso pieno; Gio 31/10) | 2026-10-31 CET | v0.7 (aperitivo: «Aperitivo a Sansepolcro» in titolo, description e prima riga; nei contatti orari e «Dove siamo» con la scheda Google; email info@pigliabene.it; Gio 12/10 «lavora in beta») | 2026-10-12 23:10 CEST | v0.6 (testata: il punto in cui sei resta acceso — Chi siamo, Servizi, Contatti seguono lo scorrimento, Natale è acceso solo sulla sua pagina; su telefono la testata scompare scorrendo in giù e torna scorrendo in su; Gio, 09/10) | 2026-10-09 CEST | v0.5 (testata anche sul telefono: Chi siamo, Servizi, Contatti e il bottone Natale; gli ancoraggi si fermano sotto la testata) | 2026-10-06 20:36 CEST | v0.4 (veste invertita: fondo panna, inchiostro rosso) 2026-09-17 12:35 CEST | fascicolo: pigliabene-sito-online (branch main = produzione) -->
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -119,6 +119,9 @@
     transition:background .25s,color .25s;
   }
   a.natale:hover{background:var(--panna);color:var(--rosso)}
+  /* PREORDINI accanto a Natale: sempre rosso pieno, su ogni pagina (Gio 31/10/2026) */
+  a.natale.preordini{background:var(--panna);color:var(--rosso)}
+  a.natale.preordini:hover{background:#7d0b0b;border-color:#7d0b0b;color:var(--rosso)}
 
   /* Gli ancoraggi si fermano sotto la testata, che resta appiccicata in alto:
      senza, «Chi siamo», «Servizi» e «Contatti» finivano sotto la testata.
@@ -140,7 +143,8 @@
     :root{--hh:101px}                      /* 10 + 44 + 6 + filo 1 + 40 */
     header{flex-wrap:wrap;padding:10px var(--mx) 0;row-gap:6px}
     .logo svg{height:44px}
-    a.natale{margin-left:auto;font-size:11px;letter-spacing:.14em;padding:0 16px}
+    a.natale{margin-left:auto;font-size:11px;letter-spacing:.14em;padding:0 12px}
+    a.natale.preordini{margin-left:0}
     nav{order:3;flex-basis:100%;margin-left:0;justify-content:space-between;gap:0;
         border-top:1px solid var(--panna-soft);font-size:11px;letter-spacing:.14em}
     nav a{min-height:40px;padding:0 10px;line-height:16px}
@@ -381,6 +385,7 @@
     <a href="#contatti">Contatti</a>
   </nav>
   <a class="natale" href="natale/?da=home">Natale</a>
+  <a class="natale preordini" href="preordini/">Preordini</a>
 </header>
 
 <!-- HERO -->

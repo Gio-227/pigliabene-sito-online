@@ -1,0 +1,106 @@
+/* Cowork v1.0 | Feel Good srl | Stile delle pagine Preordini (preordini/ e preordini/<campagna>/) | v1.0 | 2026-10-31 CET
+   Si appoggia a natale/natale.css per cornice, testata, hero, cta, sezioni, piede e WhatsApp fisso.
+   Qui solo ciò che è dei preordini: la griglia delle campagne e il modulo d'ordine (scoped in .pre).
+   Variabili ereditate con i nomi «invertiti» della home: --rosso = fondo panna, --panna = inchiostro rosso. */
+
+/* ---------- il bottone PREORDINI in testata: sempre rosso pieno (Gio 31/10) ---------- */
+a.natale.preordini{background:var(--panna);color:var(--rosso);margin-left:0}
+a.natale.preordini:hover{background:#7d0b0b;border-color:#7d0b0b;color:var(--rosso)}
+@media(max-width:520px){a.natale,a.natale.preordini{padding:0 12px}}
+
+/* ---------- hub: come funzionano ---------- */
+.passi3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,40px);max-width:1100px}
+.passi3 div{border-top:2px solid var(--panna);padding-top:16px}
+.passi3 b{display:block;font-family:'Arsenica',serif;font-weight:300;font-size:clamp(26px,3vw,40px);line-height:1.05;margin-bottom:8px}
+.passi3 p{font-size:clamp(15px,1.5vw,18px);line-height:1.6;max-width:36ch}
+.regole{margin-top:8vh;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,40px);max-width:1100px}
+.regole div{border-top:1px solid var(--panna-soft);padding-top:12px;font-size:clamp(14px,1.4vw,17px);line-height:1.6}
+.regole dt{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+@media(max-width:760px){.passi3,.regole{grid-template-columns:1fr}}
+
+/* ---------- hub: la griglia dei preordini ---------- */
+.campagne{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:clamp(18px,3vw,36px)}
+.card{display:flex;flex-direction:column;border:2.5px solid var(--panna);background:#fff;color:var(--panna);text-decoration:none;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(155,14,14,.15)}
+.card .img{position:relative;aspect-ratio:4/3;overflow:hidden;border-bottom:2.5px solid var(--panna)}
+.card .img img{width:100%;height:100%;object-fit:cover;display:block}
+.card .badge{position:absolute;top:14px;left:14px;background:var(--panna);color:var(--rosso);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:6px 12px}
+.card.chiuso .badge{background:#555}
+.card .corpo{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card .tipo{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--panna-soft)}
+.card h3{font-size:clamp(24px,2.6vw,34px);text-transform:none;line-height:1.08}
+.card .riass{font-size:15px;line-height:1.55;color:#2b2420}
+.card .meta{margin-top:auto;padding-top:12px;border-top:1px solid var(--panna-soft);font-size:13px;line-height:1.7}
+.card .meta b{font-weight:700}
+.card .vai{margin-top:12px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+.card.chiuso{opacity:.6}
+.card.chiuso:hover{transform:none;box-shadow:none}
+.nessuno{font-size:clamp(16px,1.8vw,20px);max-width:60ch}
+
+/* ---------- modulo d'ordine (preordini/<campagna>/) ---------- */
+.pre{--r:var(--panna);--p:var(--rosso);--ink:#2b2420;--g:#6b5f55;padding:0 var(--mx) 6vh;color:var(--ink)}
+.pre .wrap{max-width:1040px;margin:0 auto}
+.pre p{margin:0 0 10px}
+.pre .intro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,4vw,48px);align-items:start;padding:4vh 0 2vh}
+.pre .intro img.f{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:45% 50%;border:1px solid var(--r);display:block}
+.pre .intro .cap{font-size:12px;color:var(--g);margin-top:6px}
+.pre .intro .loghi img{height:44px;display:block;margin:4px 0 16px}
+.pre .intro p{font-size:clamp(16px,1.6vw,19px);line-height:1.6}
+.pre .blocchi{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+.pre .blocchi>div{border-top:1px solid var(--r);padding-top:8px;font-size:14px;line-height:1.5}
+.pre .blocchi b.t{display:block;font:600 12px 'Montserrat';letter-spacing:.1em;text-transform:uppercase;color:var(--r);margin-bottom:6px}
+.pre .ledate{display:block;margin-top:0;font-size:14px;letter-spacing:0}
+.pre .ledate div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #d6cda9;padding:5px 0}
+.pre .ledate div span:last-child{font-weight:600;text-align:right}
+.pre h2.sez{font-family:'Arsenica','Montserrat',serif;font-weight:300;font-size:clamp(28px,4vw,40px);text-transform:none;margin:48px 0 10px;color:var(--r);line-height:1.05}
+.pre h2.sez small{display:block;font:600 12px 'Montserrat';letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-top:6px}
+.pre h3.grp{font:300 26px 'Arsenica','Montserrat';text-transform:none;color:var(--r);margin:26px 0 2px;border-bottom:1px solid var(--r);line-height:1.2}
+.pre .pnome{margin:14px 0 0;font:600 15px 'Montserrat';color:var(--ink)}.pre .pnome span{font-weight:400;color:var(--g);font-size:13px}
+.pre .riga{display:grid;grid-template-columns:1fr auto auto;gap:4px 14px;align-items:center;padding:12px 0;border-bottom:1px solid #d6cda9}
+.pre .riga .fmt{font-weight:500}.pre .riga .fmt small{white-space:nowrap;display:block;font-size:12px;color:var(--g);font-weight:400}
+.pre .riga .fmt em{font-style:normal;color:var(--g);font-weight:400}
+.pre .prezzi{text-align:right;white-space:nowrap}.pre .prezzi s{color:var(--g);font-size:14px;margin-right:6px}
+.pre .prezzi .pre-p{font:700 21px 'Montserrat';color:var(--r)}
+.pre .badge{display:inline-block;border:1.2px solid var(--ink);padding:0 6px;font-weight:700;color:var(--ink);font-size:13px;margin-right:4px}
+.pre .qta{display:flex;align-items:center;gap:6px}
+.pre .qta button{width:40px;height:40px;border:1.5px solid var(--r);background:transparent;color:var(--r);font:600 20px/1 'Montserrat';cursor:pointer;border-radius:0}
+.pre .qta output{min-width:22px;text-align:center;font-weight:600}
+.pre .nota{font-size:13px;color:var(--g)}
+.pre form.dati{margin-top:10px;border:1.5px solid var(--r);background:#fff;padding:18px}
+.pre .campi{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.pre .campi label,.pre .pag>label{display:block;font:600 12px 'Montserrat';letter-spacing:.08em;text-transform:uppercase;color:var(--g)}
+.pre .campi input,.pre .campi textarea{width:100%;border:0;border-bottom:1.5px solid var(--ink);background:transparent;font:400 16px 'Montserrat';padding:6px 0;color:var(--ink);border-radius:0}
+.pre .campi textarea{height:48px;resize:vertical}
+.pre .campi .full{grid-column:1/-1}
+.pre .pag{margin-top:14px}.pre .pag .opz{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.pre .pag .opz label{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--r);padding:10px 12px;cursor:pointer;font:400 14px/1.4 'Montserrat';text-transform:none;letter-spacing:0;color:var(--ink)}
+.pre .pag .opz label b{display:block;color:var(--r)}
+.pre .pag input[type=radio]{margin:4px 0 0;accent-color:#9B0E0E}
+.pre .cons{display:flex;gap:10px;align-items:flex-start;font-size:13px;margin-top:14px}.pre .cons input{margin-top:3px;accent-color:#9B0E0E}
+.pre .cons a{text-decoration:underline}
+.pre .riep{margin-top:16px;border-top:1px solid var(--r);padding-top:12px;font-size:14px}
+.pre .riep ul{margin:4px 0 0;padding-left:18px}
+.pre .btn{display:inline-block;border:0;background:var(--r);color:var(--p);text-decoration:none;font:700 14px 'Montserrat';letter-spacing:.08em;text-transform:uppercase;padding:14px 20px;cursor:pointer;border-radius:0}
+.pre .btn.sec{background:transparent;color:var(--r);border:1.5px solid var(--r)}
+.pre .btn[disabled],.pre .btn[aria-disabled=true]{opacity:.45;pointer-events:none}
+.pre .err{color:var(--r);font-weight:600;font-size:14px;margin-top:8px}
+.pre .esito{margin-top:24px;border:2px solid var(--r);background:#fff;padding:20px}
+.pre .esito h2{font-family:'Arsenica','Montserrat',serif;font-weight:300;font-size:30px;text-transform:none;line-height:1.1;margin-bottom:8px;color:var(--r)}
+.pre .esito .cod{font:700 28px 'Montserrat';color:var(--r);letter-spacing:.04em}
+.pre .pagabox{margin-top:14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:start}
+.pre .kv{display:grid;grid-template-columns:auto 1fr auto;gap:8px 12px;align-items:center;font-size:15px}
+.pre .kv b{font:600 11px 'Montserrat';letter-spacing:.1em;text-transform:uppercase;color:var(--g)}
+.pre .kv code{font:600 16px 'Montserrat';color:var(--ink);word-break:break-all}
+.pre .kv button{border:1.5px solid var(--r);background:transparent;color:var(--r);font:600 12px 'Montserrat';padding:5px 9px;cursor:pointer;border-radius:0}
+.pre .qr svg{display:block;width:160px;height:160px;border:1px solid #d6cda9;background:#fff}
+.pre .qr small{display:block;font-size:11px;color:var(--g);max-width:160px;margin-top:4px}
+.pre .chiuso{border:2px solid var(--r);background:#fff;padding:18px;margin-top:20px;font-weight:600}
+.conto{font:600 13px 'Montserrat';letter-spacing:.08em;text-transform:uppercase;color:var(--rosso);background:var(--panna);padding:8px var(--mx);text-align:center}
+.carrello{position:sticky;bottom:0;background:var(--panna);color:var(--rosso);padding:12px var(--mx);display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;z-index:15}
+.carrello .tot{font:600 15px 'Montserrat'}.carrello .tot b{font-size:20px}
+.carrello a.btn{background:var(--rosso);color:var(--panna);text-decoration:none;font:700 14px 'Montserrat';letter-spacing:.08em;text-transform:uppercase;padding:12px 18px}
+.carrello a.btn[aria-disabled=true]{opacity:.45;pointer-events:none}
+body.modulo{padding-bottom:0}
+body.modulo .wa-fisso{bottom:calc(max(18px,env(safe-area-inset-bottom)) + 70px)}
+@media (max-width:760px){.pre .intro{grid-template-columns:1fr}.pre .blocchi,.pre .campi,.pre .pag .opz{grid-template-columns:1fr}.pre .campi .full{grid-column:auto}
+ .pre .riga{grid-template-columns:1fr auto}.pre .riga .qta{grid-column:1/-1;justify-content:flex-end}.pre .pagabox{grid-template-columns:1fr}}

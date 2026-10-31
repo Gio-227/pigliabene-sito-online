@@ -1,4 +1,4 @@
-/* Cowork v1.0 | Feel Good srl | Foglio di stile delle pagine di Natale (natale/, natale/confezioni/) | v2.5 | 2026-10-11 CEST (v2.5 — verifica notturna 11/10 h04: bersagli da 44 px (avviso, link del passo), link WhatsApp negli errori di rete, prezzi attenuati mentre si caricano) - 2026-10-11 CEST (v2.4 — accesso a codice: il passo del codice nella finestra, l'avviso breve, il caricamento dei prezzi) - 2026-10-10 CEST (v2.3 — Gio 14:06: schede delle confezioni più leggere: cornice 2 px, rosso pieno solo dietro il titolo, descrizione su panna, filetto sotto la testa 1 px più sottile del filo spesso) - 2026-10-10 CEST (v2.2 — Gio 02:13: il titolo attacca alla stessa altezza e con la stessa misura di «Solamente i soliti noti?»: stesso box dell'hero della home, con l'attacco calcolato sul contenuto della home) - 2026-10-09 CEST (v2.1 — Gio 17:16: si sfoglia tutto senza dati, i prezzi restano coperti e un avviso ridotto resta a vista; porta 02 in fondo alle confezioni più visibile)
+/* Cowork v1.0 | Feel Good srl | Foglio di stile delle pagine di Natale (natale/, natale/confezioni/) | v2.6 | 2026-10-11 CEST (v2.5 — verifica notturna 11/10 h04: bersagli da 44 px (avviso, link del passo), link WhatsApp negli errori di rete, prezzi attenuati mentre si caricano) - 2026-10-11 CEST (v2.4 — accesso a codice: il passo del codice nella finestra, l'avviso breve, il caricamento dei prezzi) - 2026-10-10 CEST (v2.3 — Gio 14:06: schede delle confezioni più leggere: cornice 2 px, rosso pieno solo dietro il titolo, descrizione su panna, filetto sotto la testa 1 px più sottile del filo spesso) - 2026-10-10 CEST (v2.2 — Gio 02:13: il titolo attacca alla stessa altezza e con la stessa misura di «Solamente i soliti noti?»: stesso box dell'hero della home, con l'attacco calcolato sul contenuto della home) - 2026-10-09 CEST (v2.1 — Gio 17:16: si sfoglia tutto senza dati, i prezzi restano coperti e un avviso ridotto resta a vista; porta 02 in fondo alle confezioni più visibile)
    Stessa cornice della home (testata, piede, Arsenica Light nei titoli, Montserrat nel resto, fondo panna e inchiostro rosso).
    Le variabili hanno i nomi "invertiti" come nella home del 17/09: --rosso è il FONDO (panna), --panna è l'INCHIOSTRO (rosso).
    Dopo una modifica: il link al foglio porta ?v=<sha1 breve del contenuto>, altrimenti il browser serve il CSS vecchio. */
@@ -55,6 +55,9 @@ a.natale{
   transition:background .25s,color .25s;
 }
 a.natale:hover{background:var(--panna);color:var(--rosso)}
+/* PREORDINI accanto a Natale: sempre rosso pieno, su ogni pagina (Gio 31/10/2026) */
+a.natale.preordini{background:var(--panna);color:var(--rosso)}
+a.natale.preordini:hover{background:#7d0b0b;border-color:#7d0b0b;color:var(--rosso)}
 
 /* Telefono in orizzontale e finestre basse: una riga sola, più bassa. */
 @media(min-width:521px) and (max-width:640px),(min-width:521px) and (max-height:500px){
@@ -70,7 +73,8 @@ a.natale:hover{background:var(--panna);color:var(--rosso)}
   :root{--hh:101px}
   header.testata{flex-wrap:wrap;padding:10px var(--mx) 0;row-gap:6px}
   .logo svg{height:44px}
-  a.natale{margin-left:auto;font-size:11px;letter-spacing:.14em;padding:0 16px}
+  a.natale{margin-left:auto;font-size:11px;letter-spacing:.14em;padding:0 12px}
+  a.natale.preordini{margin-left:0}
   nav.menu{order:3;flex-basis:100%;margin-left:0;justify-content:space-between;gap:0;
       border-top:1px solid var(--panna-soft);font-size:11px;letter-spacing:.14em}
   nav.menu a{min-height:40px;padding:0 10px;line-height:16px}

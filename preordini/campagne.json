@@ -1,0 +1,16 @@
+[
+ {
+  "slug": "smokin-brothers",
+  "tipo": "cibo",
+  "produttore": "Smokin’ Brothers",
+  "titolo": "Salmone scozzese affumicato a freddo",
+  "riassunto": "Baffe intere, filetti e fette, affumicati nei Cotswolds e messi sottovuoto appena lavorati. Tutto su ordinazione.",
+  "sconto": "−10 %",
+  "apertura": "2026-10-31T00:00:00+01:00",
+  "chiusura": "2026-11-08T22:00:00+01:00",
+  "chiusuraTxt": "domenica 8 novembre, ore 22:00",
+  "ritiroDal": "martedì 15 dicembre",
+  "immagine": "../catalogo/assets/img/smokin-brothers/smokin-brothers_affumicatoio-con-le-baffe-appese_web.jpg",
+  "mostraChiuso": true
+ }
+]
