@@ -1,5 +1,5 @@
-const CFG={"ENDPOINT": "", "CHIUSURA": "2026-11-08T22:00:00+01:00", "CHIUSURA_TXT": "domenica 8 novembre, ore 22:00", "IBAN": "IT31 C030 6971 6171 0000 0005 899", "INTESTATARIO": "Feel Good S.r.l.", "RITIRO_DAL": "martedì 15 dicembre", "WA": "3905751694910", "CAMPAGNA": "smokin-2026", "PREFISSO": "PB-SMK-"};
-/* Cowork v1.0 | Feel Good srl | preordini/smokin-brothers/modulo.js — il modulo del preordine (quantità, dati, invio al foglio o WhatsApp, QR SEPA) | v1.1 | 2026-10-31 16:45 CET | generato da genera-sito.py da web.js */
+const CFG={"ENDPOINT": "", "CHIUSURA": "2026-11-08T22:00:00+01:00", "CHIUSURA_TXT": "domenica 8 novembre, ore 22:00", "IBAN": "IT31 C030 6971 6171 0000 0005 899", "INTESTATARIO": "Feel Good S.r.l.", "RITIRO_DAL": "martedì 15 dicembre", "WA": "3905751694910", "CAMPAGNA": "smokin-2026", "PREFISSO": "PB-SMK-", "USCITA": "../"};
+/* Cowork v1.0 | Feel Good srl | preordini/smokin-brothers/modulo.js — il modulo del preordine (quantità, dati, invio al foglio o WhatsApp, QR SEPA) | v1.2 | 2026-10-31 18:54 CET | generato da genera-sito.py da web.js */
 const Q = {};
 const $ = (s) => document.querySelector(s);
 const eur = (x) => x.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
@@ -126,18 +126,21 @@ function mostraEsito(codice, d, righe, tot, fallback) {
   }
   const wa = `https://wa.me/${CFG.WA}?text=` + encodeURIComponent(testoWa(codice, d, righe, tot, fallback));
   const perche = CFG.ENDPOINT ? 'Non siamo riusciti a registrarlo da qui: con il tasto qui sotto ci arriva tutto, già scritto.' : 'Con il tasto qui sotto ci arriva tutto, già scritto.';
+  const grazie = `<p class="grazie"><b>Grazie per il tuo ordine!</b> Ricordati di pagare per confermarlo entro ${CFG.CHIUSURA_TXT}.</p>`;
   const testa = fallback
-    ? `<h2>Preordine pronto, mandacelo su WhatsApp</h2><p>${perche} Il tuo codice è <span class="cod">${codice}</span>: mettilo nella causale.</p><p><a class="btn" href="${wa}" target="_blank" rel="noopener">Manda il preordine su WhatsApp</a></p>`
-    : `<h2>Preordine registrato</h2><p>Il tuo codice è <span class="cod">${codice}</span>. Ti abbiamo mandato il riepilogo a <b>${d.email}</b>.</p>`;
+    ? `<h2>Preordine pronto, mandacelo su WhatsApp</h2>${grazie}<p>${perche} Il tuo codice è <span class="cod">${codice}</span>: mettilo nella causale.</p><p><a class="btn" href="${wa}" target="_blank" rel="noopener">Manda il preordine su WhatsApp</a></p>`
+    : `<h2>Preordine registrato</h2>${grazie}<p>Il tuo codice è <span class="cod">${codice}</span>. Ti abbiamo mandato il riepilogo a <b>${d.email}</b>.</p>`;
+  const esci = CFG.USCITA ? `<a class="btn sec" href="${CFG.USCITA}">Esci</a>` : `<button type="button" class="btn sec" id="esci">Esci</button>`;
   $('#esito').innerHTML = `${testa}
 <div class="riep"><b>Riepilogo</b><ul>${righe.map((x) => `<li>${x.qta} × ${x.nome} — ${eur(x.qta * x.pre)}</li>`).join('')}</ul><p style="margin:8px 0 0"><b>Totale ${eur(tot)}</b></p></div>
 <div class="riep">${paga}</div>
-<div class="riep"><p><b>Ritiro</b> in bottega dal ${rit}. Ti avvisiamo per email quando il salmone è arrivato.</p><p><a class="btn sec" href="${wa}" target="_blank" rel="noopener">${fallback ? 'Apri di nuovo WhatsApp' : 'Scrivici su WhatsApp'}</a></p></div>`;
+<div class="riep"><p><b>Ritiro</b> in bottega dal ${rit}. Ti avvisiamo per email quando il salmone è arrivato.</p><p class="azioni"><a class="btn sec" href="${wa}" target="_blank" rel="noopener">${fallback ? 'Apri di nuovo WhatsApp' : 'Scrivici su WhatsApp'}</a> ${esci}</p></div>`;
+  const b = $('#esci'); if (b) b.addEventListener('click', () => location.reload());
   $('#esito').hidden = false;
   $('#form').hidden = true;
   $('#tot').textContent = eur(tot);
   $('#risp').textContent = 'preordine ' + codice;
-  $('#vai').style.display = 'none';
+  if (CFG.USCITA) { $('#vai').textContent = 'Esci'; $('#vai').href = CFG.USCITA; $('#vai').setAttribute('aria-disabled', 'false'); } else { $('#vai').style.display = 'none'; }
   document.querySelectorAll('.qta button').forEach((b) => { b.disabled = true; });
   $('#esito').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
