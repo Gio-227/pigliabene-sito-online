@@ -1,5 +1,5 @@
-const CFG={"ENDPOINT": "", "CHIUSURA": "2026-11-08T22:00:00+01:00", "CHIUSURA_TXT": "domenica 8 novembre, ore 22:00", "IBAN": "IT31 C030 6971 6171 0000 0005 899", "INTESTATARIO": "Feel Good S.r.l.", "RITIRO_DAL": "martedì 15 dicembre", "WA": "3905751694910", "CAMPAGNA": "smokin-2026", "PREFISSO": "PB-SMK-", "USCITA": "../"};
-/* Cowork v1.0 | Feel Good srl | preordini/smokin-brothers/modulo.js — il modulo del preordine (quantità, dati, invio al foglio o WhatsApp, QR SEPA) | v1.2 | 2026-10-31 18:54 CET | generato da genera-sito.py da web.js */
+const CFG={"ENDPOINT": "https://script.google.com/macros/s/AKfycbyXlQ6RCpILBDyApKfZARBrLNJsQgZl7132ltkYDYwmTvpo7jPrmof4ArRm2eQ1Yqwf/exec", "CHIUSURA": "2026-11-08T22:00:00+01:00", "CHIUSURA_TXT": "domenica 8 novembre, ore 22:00", "IBAN": "IT31 C030 6971 6171 0000 0005 899", "INTESTATARIO": "Feel Good S.r.l.", "RITIRO_DAL": "martedì 15 dicembre", "WA": "3905751694910", "CAMPAGNA": "smokin-2026", "PREFISSO": "PB-SMK-", "USCITA": "../"};
+/* Cowork v1.0 | Feel Good srl | preordini/smokin-brothers/modulo.js — il modulo del preordine (quantità, dati, invio al foglio o WhatsApp, QR SEPA) | v1.2 | 2026-10-31 19:47 CET | generato da genera-sito.py da web.js */
 const Q = {};
 const $ = (s) => document.querySelector(s);
 const eur = (x) => x.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
