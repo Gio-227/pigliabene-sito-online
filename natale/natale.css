@@ -55,6 +55,9 @@ a.natale{
   transition:background .25s,color .25s;
 }
 a.natale:hover{background:var(--panna);color:var(--rosso)}
+/* PREORDINI accanto a Natale: sempre rosso pieno, su ogni pagina (Gio 31/10/2026) */
+a.natale.preordini{background:var(--panna);color:var(--rosso)}
+a.natale.preordini:hover{background:#7d0b0b;border-color:#7d0b0b;color:var(--rosso)}
 
 /* Telefono in orizzontale e finestre basse: una riga sola, più bassa. */
 @media(min-width:521px) and (max-width:640px),(min-width:521px) and (max-height:500px){
@@ -70,7 +73,8 @@ a.natale:hover{background:var(--panna);color:var(--rosso)}
   :root{--hh:101px}
   header.testata{flex-wrap:wrap;padding:10px var(--mx) 0;row-gap:6px}
   .logo svg{height:44px}
-  a.natale{margin-left:auto;font-size:11px;letter-spacing:.14em;padding:0 16px}
+  a.natale{margin-left:auto;font-size:11px;letter-spacing:.14em;padding:0 12px}
+  a.natale.preordini{margin-left:0}
   nav.menu{order:3;flex-basis:100%;margin-left:0;justify-content:space-between;gap:0;
       border-top:1px solid var(--panna-soft);font-size:11px;letter-spacing:.14em}
   nav.menu a{min-height:40px;padding:0 10px;line-height:16px}
